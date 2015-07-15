@@ -1,0 +1,24 @@
+{
+  "name": "relocalc",
+  "version": "0.0.0",
+  "description": "\"Relocation analysis tool\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Relocalc/Relocalc.git"
+  },
+  "keywords": [
+    "data",
+    "analysis",
+    "visualisation"
+  ],
+  "author": "Richard Van Camp, Braden Walker, David Unkefer, Duevyn Cooke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Relocalc/Relocalc/issues"
+  },
+  "homepage": "https://github.com/Relocalc/Relocalc#readme"
+}
