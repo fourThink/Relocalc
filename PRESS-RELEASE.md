@@ -17,28 +17,30 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  >Relocalc
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > The application targets individuals who are looking to move to a specific address in Austin, Tx. This will benefit users by giving a numerical score and graphical interface that estimates their satisfaction based on living priorities given my the users. 
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > The home page will allow a user to enter an address and adjust sliders that allow the application to determine the priorities of the user. After accepting this information, the user will be redirected to a results page. The results page will display two things: 
+  	1. A raw score computed by that application that represents the user's compatability level with the given a address.
+  	2. A graph to give the user a visual representation of the information used to reach the final calculation.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > Relocalc aims to tackle the problem of people looking to obtain information about an unfamiliar place before deciding to move there.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > Relocalc offers a solution by giving the user data and giving them a numerical estimate of how satisfactory the location in questino will be. 
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > "Know--before you go".
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > You need a potential destination. Enter that into the app, and Relocalc handles the rest.
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > "I had a hard time digging around to find information to help me decide if a potential home was a good fit for my family and I; then, I found Relocalc and everything was in one place. Thanks Relocalc!"
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Refer to the README for installation instructions and for a more technical description of the application.
