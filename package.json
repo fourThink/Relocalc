@@ -20,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/Relocalc/Relocalc/issues"
   },
-  "homepage": "https://github.com/Relocalc/Relocalc#readme"
+  "homepage": "https://github.com/Relocalc/Relocalc#readme",
+  "dependencies": {
+    "browserify": "^10.2.6",
+    "browserify-middleware": "^6.0.0",
+    "express": "^4.13.1",
+    "mithril": "^0.2.0"
+  }
 }
