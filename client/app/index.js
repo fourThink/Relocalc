@@ -1,10 +1,9 @@
-var m = require('mithril')
-var Header = require('./components/Header')
-var Search = require('./components/searchBox')
+var m = require('mithril');
+var Search = require('./components/searchBox');
 
-window.Relocalc = {}
+window.Relocalc = {};
 
-Relocalc.controller = function () {}
+Relocalc.controller = function () {};
 
 Relocalc.view = function (ctrl) {
   return [
@@ -12,4 +11,4 @@ Relocalc.view = function (ctrl) {
   ]
 }
 
-m.mount(document.getElementById('app'), Relocalc)
+m.mount(document.getElementById('app'), Relocalc);

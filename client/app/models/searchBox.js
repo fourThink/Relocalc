@@ -2,30 +2,29 @@ var m = require('mithril');
 var fbUrl = 'https://craply.firebaseio.com/'
 var maps = 'https://maps.googleapis.com/maps/api/geocode/'
 
+/**
+ * replaces blank spaces in submitted address with "+" per the Google API reqs
+ * @param address
+ * @returns {string}
+ */
+
 var addressFormatter = function(address) {
   var newAddress = "";
   for (var i = 0; i < address.length; i++){
     if (address[i] === " "){
       newAddress += "+";
-    } else{
-      newAddress += address[i];
-    }
+    } else{ newAddress += address[i];}
   }
   return newAddress;
-}
-
+};
 
 var Locations = module.exports = {
 
-  post: function(data){
-    console.log("post function called with" + data);
-    return m.request({method: "POST", url: fbUrl +".json", data: {address: data}})
-        .then(function(res){ console.log("response: " + res);});
-  },
-
-  geoCode: function(address){
+  postToFetchGeoCode: function(address, cb){
     return m.request({method: "POST", url: maps + 'json?address=' + addressFormatter(address)})
-        .then(function(res){ console.log("response: " + res)});
+        .then(function(res){
+          cb(res);
+        });
   },
 
   vm: function(){
@@ -34,7 +33,7 @@ var Locations = module.exports = {
       location: m.prop(''),
       longitude: m.prop(''),
       post: Location.post,
-      geoCode: Location.geoCode
+      postToFetchGeoCode: Location.postToFetchGeoCode
     }
   }
 
