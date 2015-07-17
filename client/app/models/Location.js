@@ -18,6 +18,10 @@ var addressFormatter = function(address) {
   return newAddress;
 };
 
+/**
+ * model for serves Relocalc, which passes the data down to its children in searchBox & map
+ */
+
 var Locations = module.exports = {
 
   postToFetchGeoCode: function(address, cb){
@@ -30,10 +34,8 @@ var Locations = module.exports = {
   vm: function(){
     return {
       address: m.prop(''),
-      location: m.prop(''),
-      longitude: m.prop(''),
-      post: Location.post,
-      postToFetchGeoCode: Location.postToFetchGeoCode
+      lat: m.prop(''),
+      lng: m.prop('')
     }
   }
 
