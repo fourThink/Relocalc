@@ -26,10 +26,10 @@ gulp.task('start', function () {
  */
 
 gulp.task('sass', function () {
-  gulp.src('./client/public/sass/**/*.scss')
+  gulp.src('./client/public/sass/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('style.css'))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./client/public/'));
 });
 
 /**
