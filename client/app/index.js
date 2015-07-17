@@ -1,16 +1,14 @@
-var m = require('mithril')
-var MyComponent = require('./components/MyComponent')
+var m = require('mithril');
+var Search = require('./components/searchBox');
 
+window.Relocalc = {};
 
-window.App = {}
+Relocalc.controller = function () {};
 
-App.controller = function () {}
-
-App.view = function (ctrl) {
+Relocalc.view = function (ctrl) {
   return [
-    m('h1', 'Relocalc'),
-    m.component(MyComponent, { title: 'Know the risks before relocating!' })
+    m.component(Search, {})
   ]
 }
 
-m.mount(document.getElementById('app'), App)
+m.mount(document.getElementById('app'), Relocalc);
