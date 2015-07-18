@@ -20,12 +20,19 @@ exports.controller = function (options) {
 };
 
 exports.view = function (ctrl, options) {
-  return m('.searchBox',
-      [m('label', 'Enter an Address:'),
-        m('input[type=text]', {value: options.location.address(),
-          onchange: function(e){ options.location.address(e.currentTarget.value); }}),
-            m('input[type=submit]',
-              {onclick: ctrl.fetchGeoCode})
-      ]);
+  return m('.searchBox.col-md-10',
+      [m('form.form-inline',
+        [m('.form-group',
+          [m('.input-group',
+            [m('input.form-control[type="text"][placeholder="Enter an Austin Address"]',
+              {value: options.location.address(),
+              onchange: function(e){ options.location.address(e.currentTarget.value); }}
+            )] //input form
+          )] //input group
+        ),  //form-group
+        m('input.btn.btn-default[type="submit"]',
+        {onclick: ctrl.fetchGeoCode})]
+      )] //form
+    )//searchBox
 };
 
