@@ -24,12 +24,12 @@ exports.view = function (ctrl, options) {
   m('.addressInput-card',
       [m('h1',  "Relocalc"),
         [m('form[role="form"]',
-            [m('input.addressInput.address[type="text"][placeholder="Enter an Austin Address"]',
+            [m('input.addressInput.address[type="text"][placeholder="700 San Jacinto, Austin, TX 78701"]',
               {value: options.location.address(),
               onchange: function(e){ options.location.address(e.currentTarget.value); }}
             )] //input form
         ),  //form-group
-        m('input.addressInput.addressInput-submit[type="submit"]',
+        m('input.addressInput.addressInput-submit[type="submit"][value="Try your luck"]',
         {onclick: ctrl.fetchGeoCode})]
       ] //form
     )//searchBox

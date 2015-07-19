@@ -16,7 +16,7 @@ body {
 .addressInput-card {
   padding: 25px;
   width: 600px;
-  background-color: #F7F7F7;
+  background-color: #dacea3;
   margin: 0 auto 10px;
   border-radius: 2px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
@@ -34,9 +34,9 @@ body {
   margin-bottom: 10px;
   position: relative; }
 
-.addressInput-card input {
+.addressInput-card input[type=text] {
   height: 44px;
-  font-size: 18px;
+  font-size: 24px;
   width: 100%;
   margin-bottom: 10px;
   -webkit-appearance: none;
@@ -48,16 +48,16 @@ body {
   box-sizing: border-box;
   -moz-box-sizing: border-box; }
 
-.addressInput-card.address {
+.addressInput-card.address:hover {
   border: 1px solid #b9b9b9;
   border-top: 1px solid #a0a0a0;
   -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); }
 
-.addressInput {
+.addressInput-submit {
   text-align: center;
-  font-size: 32px;
+  font-size: 24px;
   font-family: 'Arial', sans-serif;
   font-weight: 700;
   height: 45px;
@@ -71,14 +71,14 @@ body {
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0, 0, 0, 0.1);
-  background-color: #4d90fe;
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4d90fe), to(#4787ed)); }
+  background-color: #67a398;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */ }
 
 .addressInput-submit:hover {
   /* border: 1px solid #2f5bb7; */
   border: 0px;
   text-shadow: 0 1px rgba(0, 0, 0, 0.3);
-  background-color: #357ae8;
+  background-color: #528279;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */ }
 
 .addressInput-help {
