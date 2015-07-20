@@ -1,5 +1,6 @@
 var m = require('mithril');
 var Location = require('../models/location');
+//var loaderView = require('./loader').loader;
 
 exports.controller = function(options) {
   ctrl = this;
@@ -13,7 +14,7 @@ exports.controller = function(options) {
      else {
        return 8;
      }
-   }
+   };
 
 
     context.timer = setTimeout(function () {
@@ -47,9 +48,9 @@ exports.controller = function(options) {
 };
 
 exports.view = function(ctrl, options) {
-  // var cb = function(){alert('Helloooooooo')}
-  // console.log(options.results[0].geometry.location.lat);
- return  m('.mapContainer', {config: ctrl.initialize});
+   return m('.row',[
+    m('.mapContainer', {config: ctrl.initialize})
+   ])
 };
 
 function drawMap() {
@@ -61,7 +62,25 @@ function unloadable(element, isInit, context) {
    context.timer = setTimeout(function() {
        ctrl.initialize();
    }, 0);
-};
+}
 
+//was testing out using a loader below instead of/with setTimeout
+/*
+function requestWithFeedback(args) {
+  //query the DOM for loaders
+  var loaders = document.querySelectorAll(".loader");
+
+  for (var i = 0, loader; loader = loaders[i]; i++) {
+    loader.style.display = "block";
+  }
+
+  return m.request(args).then(function(value){
+    for (var i = 0, loader; loader = loaders[i]; i++) {
+      loader.style.display = "none";
+    }
+    return value;
+  })
+}
+*/
 
 // results[0].geometry.location.lat and results[0].geometry.location.lng
