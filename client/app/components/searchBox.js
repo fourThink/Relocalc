@@ -20,7 +20,8 @@ exports.controller = function (options) {
 };
 
 exports.view = function (ctrl, options) {
-  return m('.card-holder',[
+  return m('.row', [
+    m('.card-holder',[
   m('.addressInput-card',
       [m('h1',  "Relocalc"),
         [m('form[role="form"]',
@@ -33,6 +34,7 @@ exports.view = function (ctrl, options) {
         {onclick: ctrl.fetchGeoCode})]
       ] //form
     )//searchBox
+  ])
 ])
 };
 
