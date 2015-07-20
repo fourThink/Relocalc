@@ -41,3 +41,6 @@ resources/templates.list
 build/
 build.properties
 junit*.properties
+
+### database info
+server/lib/restaurants.js

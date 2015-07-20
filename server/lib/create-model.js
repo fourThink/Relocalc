@@ -30,7 +30,8 @@ module.exports = function (modelName, tablename, extras) {
     },
 
     create: function (attrs) {
-      attrs.created_at = new Date()
+      attrs.created_at = new Date();
+      attrs.updated_at = new Date();
       return db(tablename).insert(attrs).return(attrs)
     },
 
