@@ -89,6 +89,9 @@ body {
 .card-holder {
   padding: 30px 30px 30px 30px; }
 
+.signup-container {
+  margin-top: 30px; }
+
 .loader {
   margin-left: 400px;
   margin-top: 50px; }
