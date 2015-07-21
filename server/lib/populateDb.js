@@ -1,10 +1,12 @@
 var db = require('./db.js')
-var dataArray = require('./restaurants.js');
+var restaurantArray = require('../data/restaurants.js');
+var crimeArray = require('../data/crimes.js')
 var Restaurant = require('../models/restaurant.js')
 var RestaurantInspection = require('../models/restaurant_inspection.js')
+var Crime = require('../models/crime.js')
 
 //This file is created to populate restuartants and restaurant_inspections tables
-var parseAddress = function (addr){
+var parseRestaurantAddress = function (addr){
   var result = {
 	  street: addr.match(/.*\n.*\n/)[0],
 	  lat: addr.match(/-?\d{1,3}\.\d*\,/)[0].slice(0,-1),
@@ -14,9 +16,9 @@ var parseAddress = function (addr){
 }
 
 var insertRestaurant = function(data){
-  var addr = parseAddress(data.address);
+  var addr = parseRestaurantAddress(data.address);
   return Restaurant.create({
-    facility_id: data.facility_id,
+    id: data.facility_id,
     name: data.name,
     address: addr.street,
     latitude: addr.lat,
@@ -24,35 +26,44 @@ var insertRestaurant = function(data){
   });
 }
 
-var insertInspection = function (data){
-  // return db('restaurant_inspections')
-  // .insert({
-  //   facility_id: data.facility_id,
-  //   score: data.score,
-  //   date: data.date,
-  //   created_at: new Date(),
-  //   updated_at: new Date()
-  // })
+var insertRestaurantInspection = function (data){
   return RestaurantInspection.create({
-    facility_id: data.facility_id,
+    restaurant_id: data.facility_id,
     score: data.score,
     date: data.date,
   });
 }
 
+var insertCrime = function(data){
+  return Crime.create({
+    id: data.report_number,
+    type: data.crime_type,
+    street: data.address,
+    city_state: 'AUSTIN, TX',
+    latitude: data.latitude,
+    longitude: data.longitude
+  });
+}
 
- var popluteTables = function (array){
+var popluteRestaurantTables = function (array){
   array.map(function (info) {
     return insertRestaurant(info)
     .then(function(){
-     return insertInspection(info); 
+     return insertRestaurantInspection(info); 
     })
     .catch(function (){
-      return insertInspection(info);
+      return insertRestaurantInspection(info);
     })
   })
- }
+}
+
+var populateCrimeTable = function(array){
+  array.map(function (crime){
+    return insertCrime(crime)
+  });
+}
 
 
-popluteTables(dataArray);
-
+popluteRestaurantTables(restaurantArray)
+populateCrimeTable(crimeArray);
+//console.log(dataArray.length + ', ' + crimeArray.length)

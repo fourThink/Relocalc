@@ -2,9 +2,12 @@
 exports.up = function(knex, Promise) {
   return Promise.all([ 
   	knex.schema.createTable('crimes', function (table){
-      	table.increments();
-      	table.string('name');
-      	table.string('location');
+      	table.string('id').primary();
+      	table.string('type');
+        table.string('street');
+      	table.string('city_state');
+        table.string('latitude');
+        table.string('longitude');
       	table.timestamps();
     })
   ])
