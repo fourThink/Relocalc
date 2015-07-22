@@ -13,13 +13,14 @@ signup.controller = function (options) {
   ctrl.signup = function(e) {
     e.preventDefault();
     if (validateInputs(ctrl.email(), ctrl.password())){
-      console.log("failed");
+      toastr["error"]("That email and password combo is invalid. Try Again.");
       ctrl.warning = {};
       return ctrl.warning.error = "Please enter a valid email address and password";
     } else {
       Auth.signUp( ctrl.email(), ctrl.password() ).then(function(){
         clearInputs();
-        console.log("successfully signed up");
+        toastr["success"]("Your Relocalc account is created!");
+        m.route("/");
       }, ctrl.error)
     }
   };
