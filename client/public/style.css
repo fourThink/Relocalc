@@ -1,7 +1,11 @@
+.gaugeContainer {
+  width: 50%;
+  height: 100%; }
+
 .mapContainer {
   height: 400px;
   width: 600px;
-  padding: 100;
+  padding: 100px;
   margin: 0 auto; }
 
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
@@ -15,7 +19,7 @@ body {
 
 .addressInput-card {
   padding: 10px 25px 25px 25px;
-  width: 600px;
+  width: 100%;
   background-color: #c8bebe;
   margin: 0 auto 10px;
   border-radius: 2px;
@@ -36,7 +40,7 @@ body {
 
 .addressInput-card input[type=text] {
   height: 44px;
-  font-size: 24px;
+  font-size: 18px;
   width: 100%;
   margin-bottom: 10px;
   -webkit-appearance: none;

@@ -18,7 +18,7 @@ body {
 
 .addressInput-card {
   padding: 10px 25px 25px 25px;
-  width: 600px;
+  width: 100%;
   background-color: $background_color;
   margin: 0 auto 10px;
   border-radius: 2px;
@@ -42,7 +42,7 @@ body {
 
 .addressInput-card input[type=text] {
   height: 44px;
-  font-size: 24px;
+  font-size: 18px;
   width: 100%;
   margin-bottom: 10px;
   -webkit-appearance: none;
