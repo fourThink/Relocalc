@@ -10,7 +10,8 @@ exports.controller = function(options) {
       var gaugeOptions = {
 
         chart: {
-            type: 'solidgauge'
+            type: 'solidgauge',
+            spacing: 50
         },
 
         title: {
@@ -18,7 +19,6 @@ exports.controller = function(options) {
           style: {
             'color':'#000',
             'fontSize':'36px',
-            'fontWeight':'bold'
           },
           y: 40
         },

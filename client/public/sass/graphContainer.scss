@@ -5,9 +5,11 @@
 	padding: 100px;
 }
 
-.spacingDiv {
-	padding: 20px;
-	margin: 20px;
-	height: 100%;
-	width: 100%;
+.row {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.col-sm-4 {
+	border-radius: 10px;
 }
