@@ -17,11 +17,18 @@ signup.controller = function (options) {
       ctrl.warning = {};
       return ctrl.warning.error = "Please enter a valid email address and password";
     } else {
-      Auth.signUp( ctrl.email(), ctrl.password() ).then(function(){
+      Auth.signUp( ctrl.email(), ctrl.password(), function( success, error ) {
         clearInputs();
-        toastr["success"]("Your Relocalc account is created!");
-        m.route("/");
-      }, ctrl.error)
+        if (success) {
+          toastr["success"]("Your Relocalc account is created!");
+          m.route("/");
+        }
+        if (error) {
+          toastr["error"](error);
+          ctrl.error(error);
+        }
+        else console.log("failed");
+      })
     }
   };
 
