@@ -2,9 +2,21 @@
   width: 50%;
   height: 100%; }
 
+.crimeGraph .restaurantSafety .restaurantNumber {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 100px; }
+
+.spacingDiv {
+  padding: 20px;
+  margin: 20px;
+  height: 100%;
+  width: 100%; }
+
 .mapContainer {
   height: 400px;
-  width: 600px;
+  width: 50%;
   padding: 100px;
   margin: 0 auto; }
 

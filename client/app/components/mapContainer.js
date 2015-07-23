@@ -63,9 +63,7 @@ exports.controller = function(options) {
 };
 
 exports.view = function(ctrl, options) {
-   return m('.col-sm-6',[
-    m('.mapContainer', {config: ctrl.initialize})
-   ])
+   return m('.col-sm-6 .mapContainer', {config: ctrl.initialize});
 };
 
 function drawMap() {
