@@ -8,11 +8,12 @@
   margin: 0 auto;
   padding: 100px; }
 
-.spacingDiv {
-  padding: 20px;
-  margin: 20px;
-  height: 100%;
-  width: 100%; }
+.row {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+.col-sm-4 {
+  border-radius: 10px; }
 
 .mapContainer {
   height: 400px;
@@ -22,7 +23,8 @@
 
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 body {
-  background: url(https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg) no-repeat center center fixed;
+  /*background: url(https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg) no-repeat center center fixed;*/
+  background-color: #435359;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -32,14 +34,14 @@ body {
 .addressInput-card {
   padding: 10px 25px 25px 25px;
   width: 100%;
-  background-color: #c8bebe;
+  background-color: #2A373C;
   margin: 0 auto 10px;
-  border-radius: 2px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  /*box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);*/
   overflow: hidden; }
 
 .addressInput-card h1 {
-  font-weight: 150;
+  font-weight: 200;
   text-align: center;
   font-size: 2.7em; }
 
@@ -57,28 +59,28 @@ body {
   margin-bottom: 10px;
   -webkit-appearance: none;
   background: #fff;
-  border: 1px solid #d9d9d9;
-  border-top: 1px solid #c0c0c0;
-  /* border-radius: 2px; */
+  /*border: 1px solid #d9d9d9;*/
+  /*border-top: 1px solid #c0c0c0;*/
+  border-radius: 20px;
   padding: 0 8px;
   box-sizing: border-box;
   -moz-box-sizing: border-box; }
 
 .addressInput-card.address:hover {
-  border: 1px solid #b9b9b9;
-  border-top: 1px solid #a0a0a0;
-  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); }
+  /*border: 1px solid #b9b9b9;*/
+  /*border-top: 1px solid #a0a0a0;*/
+  /*-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);*/ }
 
 .addressInput-submit {
   text-align: center;
   font-size: 24px;
   font-family: 'Arial', sans-serif;
-  font-weight: 700;
+  font-weight: 200;
   height: 45px;
   padding: 0 8px;
-  /* border-radius: 3px; */
+  border-radius: 20px;
   /* -webkit-user-select: none;
     user-select: none; */ }
 
@@ -87,14 +89,14 @@ body {
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0, 0, 0, 0.1);
-  background-color: #596969;
+  background-color: #192C33;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */ }
 
 .addressInput-submit:hover {
   /* border: 1px solid #2f5bb7; */
   border: 0px;
-  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
-  background-color: #748989;
+  /*text-shadow: 0 1px rgba(0,0,0,0.3);*/
+  background-color: #2A373C;
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */ }
 
 .addressInput-help {
@@ -104,6 +106,24 @@ body {
 
 .card-holder {
   padding: 30px 30px 30px 30px; }
+
+div, input, form {
+  border-radius: 20px;
+  font-weight: 200; }
+
+input {
+  text-align: center;
+  border: 0px; }
+
+.resultsHeadline {
+  text-align: center;
+  font-size: 36px;
+  color: white;
+  font-weight: 200; }
+
+h1 {
+  color: white;
+  font-weight: 200; }
 
 .searchesContainer {
   margin-top: 50px; }
