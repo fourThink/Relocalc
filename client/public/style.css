@@ -89,6 +89,15 @@ body {
 .card-holder {
   padding: 30px 30px 30px 30px; }
 
+.searchesContainer {
+  margin-top: 50px; }
+  .searchesContainer .redirect-link {
+    padding-top: 8px;
+    padding-right: 8px; }
+
+.signup-container {
+  margin-top: 30px; }
+
 .loader {
   margin-left: 400px;
   margin-top: 50px; }
