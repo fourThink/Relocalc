@@ -28,6 +28,21 @@ exports.controller = function(options) {
 
       var map = new google.maps.Map(document.querySelector('.mapContainer'), mapOptions);
 
+      // //Trying out adding multiple markers for dangerous dogs
+      // var addresses = ['2105 Horse Wagon Dr', '3904 Caney Creek', '4809 Clear View Dr'];
+      // for (var x = 0; x < addresses.length; x++) {
+      //   $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+addresses[x]+'&sensor=false', null, function(data){
+      //     var p = data.results[x].geometry.location;
+      //     var latlng = new google.maps.LatLng(p.lat, p.lng);
+      //     new google.maps.Marker({
+      //       position: latlng,
+      //       map: map
+      //     });
+      //   });
+      // }
+      // // END Trying out adding multiple markers for dangerous dogs
+
+      //First version of marker
       var iconImg = '../img/icon.png';
 
       var marker = new google.maps.Marker({
@@ -38,7 +53,7 @@ exports.controller = function(options) {
       });
 
       marker.setMap(map);
-
+      //End first version of marker
     }, 0);
 
 
@@ -48,9 +63,7 @@ exports.controller = function(options) {
 };
 
 exports.view = function(ctrl, options) {
-   return m('.row',[
-    m('.mapContainer', {config: ctrl.initialize})
-   ])
+   return m('.col-sm-6 .mapContainer', {config: ctrl.initialize});
 };
 
 function drawMap() {
