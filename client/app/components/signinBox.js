@@ -49,7 +49,7 @@ function checkViewState(ctrl){
 function renderLoggedOutView(ctrl){
   return m('.container-fluid',
       [m('.navbar-header',
-        [m('a.navbar-brand[href="/"]', "Relocalc")
+        [m('a.navbar-brand[href="/#/"]', "Relocalc")
          ]),
         m('div',
           [m('ul.nav.navbar-nav',
