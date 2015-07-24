@@ -125,11 +125,20 @@ h1 {
   color: white;
   font-weight: 200; }
 
+.panel {
+  border-radius: 20px; }
+
+.list-group {
+  border-radius: 20px; }
+
 .searchesContainer {
   margin-top: 50px; }
   .searchesContainer .redirect-link {
     padding-top: 8px;
     padding-right: 8px; }
+
+.list-group-item {
+  border-radius: 0; }
 
 .signup-container {
   margin-top: 30px; }
