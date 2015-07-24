@@ -1,5 +1,4 @@
-var db = require('../lib/db.js')
-var Promise = require('bluebird')
-var createModel = require('../lib/create-model.js')
+var createModel = require('./create-model.js')
 
+//Model for crimes table
 var Crime = module.exports = createModel('Crime', 'crimes', {});

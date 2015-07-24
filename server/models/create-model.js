@@ -1,8 +1,11 @@
-var db = require('./db.js')
+var db = require('../db/db.js')
 var Promise = require('bluebird')
 var util = require('util')
 
-
+//All models usee the exported function of the class to inherit from this general model
+//The exported function returns an object that represents an instance of a db tables
+//The function takes a name for each model instance, the name of the table in the db, and an  object that has any additional method needed for a particualar model
+//The purpose of this file is to avoid writing the same functions common to all tables (DRY)
 module.exports = function (modelName, tablename, extras) {
 
    // Initialize with methods common across all models
@@ -35,22 +38,29 @@ module.exports = function (modelName, tablename, extras) {
       return db(tablename).insert(attrs).return(attrs)
     },
 
-    // Updates a specific record by its id
-    updateOne: function (attrs) {
-      if (! attrs.id) {
-        return Promise.reject(new Model.InvalidArgument('id_is_required'))
-      }
+    // scan: function (lat, lng) {
+    //   return db.select()
+    //   .from(tablename)
+    //   .where(tablename + '.type', '=', 'BURGLARY OF VEHICLE')
+    //   .limit(5);
+    // },
 
-      attrs.updated_at = new Date()
-      return db(tablename).update(attrs).where({ id: attrs.id })
-        .then(function(affectedCount) {
-          return (affectedCount === 0) ? Promise.reject(new Model.NotFound) : attrs
-        })
-    },
+    // // Updates a specific record by its id
+    // updateOne: function (attrs) {
+    //   if (! attrs.id) {
+    //     return Promise.reject(new Model.InvalidArgument('id_is_required'))
+    //   }
 
-    destroy: function (id) {
-      return db(tablename).where({ id: id }).delete()
-    },
+    //   attrs.updated_at = new Date()
+    //   return db(tablename).update(attrs).where({ id: attrs.id })
+    //     .then(function(affectedCount) {
+    //       return (affectedCount === 0) ? Promise.reject(new Model.NotFound) : attrs
+    //     })
+    // },
+
+    // destroy: function (id) {
+    //   return db(tablename).where({ id: id }).delete()
+    // },
   }
 
 
@@ -70,8 +80,7 @@ module.exports = function (modelName, tablename, extras) {
   }
   util.inherits(Model.InvalidArgument, Error)
 
-  // Finally, mix in any extra methods from caller (see next section for an example)
-  //return Object.assign(Model, extras);
+  //this is where extra functions are added to the model
   for (key in extras){
     Model[key] = extras[key]
   }

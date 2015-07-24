@@ -5,6 +5,7 @@ var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
 var jshint = require('gulp-jshint');
+var uglify = require('gulp-uglify')
 var stylish = require('jshint-stylish');
 
 /**
@@ -21,10 +22,18 @@ gulp.task('start', function () {
   })
 })
 
+/*
+ minimize data files
+*/
+gulp.task('uglify', function (){
+  gulp.src('./server/data/*.js')
+  .pipe(uglify())
+  .pipe(gulp.dest('./server/data/'))
+});
+
 /**
  *  compiles sass files into css
  */
-
 gulp.task('sass', function () {
   gulp.src('./client/public/sass/*.scss')
     .pipe(sass().on('error', sass.logError))
