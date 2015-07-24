@@ -23,9 +23,11 @@
   "homepage": "https://github.com/Relocalc/Relocalc#readme",
   "dependencies": {
     "bluebird": "^2.9.34",
+    "body-parser": "^1.13.2",
     "browserify": "^10.2.6",
     "browserify-middleware": "^6.0.0",
     "express": "^4.13.1",
+    "geolib": "^2.0.17",
     "knex": "^0.8.6",
     "mithril": "^0.2.0",
     "pg": "^4.4.0"
@@ -36,6 +38,7 @@
     "gulp-jshint": "^1.11.2",
     "gulp-nodemon": "^2.0.3",
     "gulp-sass": "^2.0.4",
+    "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.3.2",
     "jshint-stylish": "^2.0.1"
