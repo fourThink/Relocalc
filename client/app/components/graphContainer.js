@@ -1,8 +1,9 @@
 var m = require('mithril');
+var Location = require('../models/Location');
 
 exports.controller = function(options) {
   ctrl = this;
-
+  
   ctrl.initCrime = function (element, isInit, context) {
     
         //Initialize crime chart
@@ -23,10 +24,10 @@ exports.controller = function(options) {
                 },
                 series: [{
                     name: 'Your Search',
-                    data: [13]
+                    data: [Location.search().crimes]
                 }, {
                     name: 'City of Austin (average)',
-                    data: [20]
+                    data: [144]
                 }]
             });
         });
@@ -53,7 +54,7 @@ exports.controller = function(options) {
                 },
                 series: [{
                     name: 'Your Search',
-                    data: [85]
+                    data: [Math.floor(Location.search().restAvg)]
                 }, {
                     name: 'City of Austin (average)',
                     data: [70]
@@ -83,10 +84,10 @@ exports.controller = function(options) {
                 },
                 series: [{
                     name: 'Your Search',
-                    data: [25]
+                    data: [Location.search().restaurants]
                 }, {
                     name: 'City of Austin (average)',
-                    data: [40]
+                    data: [51]
                 }]
             });
         });
