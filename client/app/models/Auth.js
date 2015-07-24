@@ -2,18 +2,35 @@ var m = require('mithril');
 var host = "localhost:4000";
 var fb = 'https://craply.firebaseio.com/';
 var ref = new Firebase(fb);
+
 /**
- * returns session token
+ * Below is a global method to access a local object with the current authenticated userID
+ */
+
+var LoggedIn = {};
+LoggedIn.userID = null;
+
+window.checkUser = function() {
+  return LoggedIn.userID;
+};
+
+ref.onAuth(function(authData) {
+  if(authData) {
+    console.log("logout state changed (+)" + authData);
+    return LoggedIn.userID = authData.uid;
+  }
+  console.log("logout state changed (-)" + authData);
+  return LoggedIn.userID = null;
+});
+
+/**
+ * AUTH MDDEL
+ * @type {{createUserAndLogin: Function, signIn: Function, logout: Function, isAuthenicated: Function}}
  */
 
 var Auth = module.exports = {
 
-  token: null,
-
-  signUp: function(email, password, cb){
-    var email = email;
-    var password = password;
-    var success = null;
+  createUserAndLogin: function(email, password, cb){
     return ref.createUser({
       email    : email,
       password : password
@@ -21,41 +38,43 @@ var Auth = module.exports = {
       if (error) {
         toastr["error"](error);
       } else {
-        ref.authWithPassword({
-          email    : email,
-          password : password
-        }, function(error, authData) {
-          if (error) {
-            cb(null, error)
-          } else {
-            success = true;
-            cb(success, null);
-          }
-        });
+        LoggedIn.userID = userData.uid;
+        Auth.signIn(email, password, cb)
       }
     })
   },
 
-  authorizeUser: function(authToken, cb){
-    return ref.authWithCustomToken(authToken, function(error, authData) {
-        if (error) {
-          console.log("Authentication Failed!", error);
-        } else {
-          console.log("Authenticated successfully with payload:", authData);
-        }
-      });
+  signIn: function(email, password, cb){
+    var loggedIn = null;
+    return ref.authWithPassword({
+      'email'    : email,
+      'password' : password
+    }, function(error, authData) {
+      if (error) {
+        console.log("Login Failed!", error);
+        cb(null, error, null);
+      } else {
+        console.log("Authenticated successfully with payload:", authData);
+        LoggedIn.userID = authData.uid;
+        cb(LoggedIn.userID, error, authData.uid);
+      }
+    });
   },
 
+  logout : function() {
+    LoggedIn.userID = null;
+    return ref.unauth();
+  },
 
-  signIn: function(email, password, cb){
-    return m.request({
-      method: 'POST',
-      url: host + '/signin',
-      data: { email: email, password: password }
-  })
-      .then(function(response) {
-        Auth.token = response.apiToken;
-      })
+  isAuthenicated: function() {
+    var authData = ref.getAuth();
+    if (authData) {
+      console.log("User " + authData.uid + " is logged in with " + authData.provider);
+      LoggedIn.userID = authData.uid;
+      return authData.uid;
+    } else {
+      console.log("User is logged out");
+      return false;
+    }
   }
-
 };

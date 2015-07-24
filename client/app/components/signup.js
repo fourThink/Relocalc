@@ -17,17 +17,16 @@ signup.controller = function (options) {
       ctrl.warning = {};
       return ctrl.warning.error = "Please enter a valid email address and password";
     } else {
-      Auth.signUp( ctrl.email(), ctrl.password(), function( success, error ) {
+      Auth.createUserAndLogin( ctrl.email(), ctrl.password(), function( success, error ) {
         clearInputs();
         if (success) {
           toastr["success"]("Your Relocalc account is created!");
           m.route("/");
         }
-        if (error) {
+        else if (error) {
           toastr["error"](error);
           ctrl.error(error);
         }
-        else console.log("failed");
       })
     }
   };
@@ -80,7 +79,7 @@ function signUpForm() {
         value: ctrl.password(),
         onchange: m.withAttr('value', ctrl.password)
       })]),
-    m('input.btn.btn-default.btn-lg.pull-right[type="submit"][value="Signup"]', {onclick: ctrl.signup}),
+    m('input.btn.btn-default.btn-lg.pull-right.signup-btn[type="submit"][value="Signup"]', {onclick: ctrl.signup}),
   ]
 }
 

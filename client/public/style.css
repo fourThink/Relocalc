@@ -21,6 +21,19 @@
   padding: 100px;
   margin: 0 auto; }
 
+.logout-btn {
+  margin-top: 8px;
+  margin-right: 8px;
+  background-color: #435359;
+  color: white; }
+
+.login-btn {
+  background-color: #435359;
+  color: white; }
+
+.navbar-login {
+  margin-right: 6px; }
+
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 body {
   /*background: url(https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg) no-repeat center center fixed;*/
@@ -133,6 +146,9 @@ h1 {
 
 .signup-container {
   margin-top: 30px; }
+  .signup-container .signup-btn {
+    background-color: #435359;
+    color: white; }
 
 .loader {
   margin-left: 400px;
