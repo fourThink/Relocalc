@@ -10,11 +10,10 @@ exports.controller = function (options) {
 
   ctrl.fetchGeoCode = function() {
     var address = options.location.address();
-    return Location.postToFetchGeoCode(address, function(res) {
+    return Location.postToFetchRestaurantData(address, function(res) {
       options.location.lng(res.results[0].geometry.location.lng);
       options.location.lat(res.results[0].geometry.location.lat);
-      console.log('lat: ' + options.location.lat());
-      console.log('lng: ' + options.location.lng());
+      console.log(res);
     });
   };
 };
