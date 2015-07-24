@@ -8,7 +8,9 @@ var Gauge = require('./components/livabilityGauge');
 var Graphs = require('./components/graphContainer');
 var RestaurantSafety = require('./components/restaurantSafety');
 var RestaurantNumber = require('./components/restaurantNumber');
+var About = require('./components/about');
 var Location = require('./models/Location');
+var Auth = require('./models/Auth');
 
 window.Relocalc = {};
 
@@ -36,5 +38,6 @@ m.route.mode = "hash";
 m.route(document.getElementById('app'), "/", {
   "/": Relocalc,
   "/signup": Signup,
+  "/about": About,
   "/searches/:userID": SearchList
 });
