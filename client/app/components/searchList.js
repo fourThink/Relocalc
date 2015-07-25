@@ -18,6 +18,13 @@ exports.controller = function (options) {
   }
 };
 
+/**
+ * The config m.route for links ensures the whole page is not refreshed when link is clicked
+ * @param ctrl
+ * @param options
+ * @returns {*}
+ */
+
 
 exports.view = function (ctrl, options) {
   if(window.checkUser()) {

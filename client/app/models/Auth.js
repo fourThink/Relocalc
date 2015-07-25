@@ -4,7 +4,7 @@ var fb = 'https://craply.firebaseio.com/';
 var ref = new Firebase(fb);
 
 /**
- * Below is a global method to access a local object with the current authenticated userID
+ * Global getter (checkUser) to access a local object with the current authenticated userID
  */
 
 var LoggedIn = {};
@@ -13,6 +13,8 @@ LoggedIn.userID = null;
 window.checkUser = function() {
   return LoggedIn.userID;
 };
+
+// onAuth is a Firebase method that triggers if there is a change in the status of the authentication status
 
 ref.onAuth(function(authData) {
   if(authData) {
@@ -24,7 +26,7 @@ ref.onAuth(function(authData) {
 });
 
 /**
- * AUTH MDDEL
+ * AUTH MODEL
  * @type {{createUserAndLogin: Function, signIn: Function, logout: Function, isAuthenicated: Function}}
  */
 
@@ -65,6 +67,8 @@ var Auth = module.exports = {
     LoggedIn.userID = null;
     return ref.unauth();
   },
+
+  //not currently being used
 
   isAuthenicated: function() {
     var authData = ref.getAuth();
