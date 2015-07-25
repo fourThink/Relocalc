@@ -1,6 +1,5 @@
 var m = require('mithril');
 var Auth = require('../models/Auth');
-
 var signup = module.exports = {};
 
 signup.controller = function (options) {
@@ -37,6 +36,13 @@ signup.controller = function (options) {
     ctrl.error(null)
     flash = null
   }
+
+  /**
+   * Helper function checks that it is valid email and password is at least 6 numbers and letters
+   * @param email
+   * @param password
+   * @returns {boolean}
+   */
 
   function validateInputs (email, password) {
     var emailMatch = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;

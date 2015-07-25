@@ -19,36 +19,43 @@ var addressFormatter = function(address) {
 };
 
 /**
- * model for serves Relocalc, which passes the data down to its children in searchBox & map
+ * model serves Relocalc (main component), which passes the data down to its children in searchBox & map
  */
 
 var Locations = module.exports = {
 
   search: m.prop({}),
 
-  postToFetchGeoCode: function(address, cb){
+  postToFetchGeoCode: function(address, callback){
     return m.request({method: "POST", url: maps + 'json?address=' + addressFormatter(address)})
         .then(function(res){
-          cb(res);
+          callback(res);
         });
   },
 
+  lat: m.prop(''),
+  lng: m.prop(''),
+
   postToFetchRestaurantData: function(address, cb) {
     console.log(address);
-    return this.postToFetchGeoCode(address, function (res) {
+    var cb = cb;
+    this.postToFetchGeoCode(address, function (res) {
+      Locations.lat(res.results[0].geometry.location.lat);
+      Locations.lng(res.results[0].geometry.location.lng);
       var locationData = {
         "address": address,
         "lat": res.results[0].geometry.location.lat,
         "lng": res.results[0].geometry.location.lng,
         "radius": 1
       };
-      console.log(res);
+      console.log(locationData);
       return m.request({method: "POST", url: "", 'Content-Type': 'application/json', data: locationData})
         .then(function(res) {
-          var modelDataResponse = modelData(res);
-          Locations.search(modelDataResponse);
-          return cb(modelDataResponse);
-        }.bind(this))
+          var data = modelData(res);
+          Locations.search( data );
+            console.log(data);
+          return cb(data);
+        })
     });
   },
 
@@ -79,12 +86,16 @@ var modelData = function(data) {
   var response = {
     crimes: data.crimes.length,
     restaurants: data.restaurants.length,
-    restAvg: avg
+    restAvg: avg,
+    lat: Locations.lat(),
+    lng: Locations.lng()
   }
 
   return response;
 };
 
+/*
 Locations.postToFetchRestaurantData("300 Congress Ave Austin Tx", function(res) {
   console.log(res);
 });
+*/

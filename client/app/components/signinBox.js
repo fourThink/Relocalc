@@ -10,7 +10,6 @@ header.controller = function (options) {
   ctrl.loginUser = function(e) {
     e.preventDefault();
       Auth.signIn( e.target.email.value, e.target.password.value , function( user, error, uid ) {
-        clearInputs();
         if (user) {
           toastr["success"]("You are logged in!");
           //console.log("User: " + uid);
@@ -29,11 +28,15 @@ header.controller = function (options) {
     Auth.logout();
     toastr["warning"]("You are logged out");
   };
-
-  function clearInputs () {
-    //Todo
-  }
 };
+
+/**
+ * The header view changes depending on the returned value for the global checkUser method
+ * The config m.route for links ensures the whole page is not refreshed when link is clicked
+ * @param ctrl
+ * @param options
+ * @returns {*}
+ */
 
 
 header.view = function (ctrl, options) {
@@ -49,12 +52,12 @@ function checkViewState(ctrl){
 function renderLoggedOutView(ctrl){
   return m('.container-fluid',
       [m('.navbar-header',
-        [m('a.navbar-brand[href="/#/"]', "Relocalc")
+        [m('a.navbar-brand[href="/"]', "Relocalc", {config: m.route})
          ]),
         m('div',
           [m('ul.nav.navbar-nav',
-            [m('li',[ m('a[href="/#/about"]', "About")]),
-            m('li',[ m('a[href="/#/signup"]', "Signup")])
+            [m('li',[ m('a[href="/about"]', "About", {config: m.route})]),
+            m('li',[ m('a[href="/signup"]', "Signup", {config: m.route})])
             ])
           ]),  //end div wrapping ul
         m('form.navbar-form.navbar-right', {onsubmit: ctrl.loginUser},
@@ -72,12 +75,12 @@ function renderLoggedOutView(ctrl){
 var renderLoggedInView = function(ctrl){
   return m('.container-fluid',
       [m('.navbar-header',
-        [m('a.navbar-brand[href="/#/"]', "Relocalc")
+        [m('a.navbar-brand[href="/"]', "Relocalc", {config: m.route})
       ]),
       m('div',
         [m('ul.nav.navbar-nav',
-          [m('li',[ m('a[href=/#/searches/' + window.checkUser() + ']', "Previous" +
-            " Searches")])
+          [m('li',[ m('a[href=/searches/' + window.checkUser() + ']', "Previous" +
+            " Searches", {config: m.route})])
           ])
         ]),
       m('.div',

@@ -4,17 +4,22 @@ var Relocalc = require('../index');
 
 exports.controller = function (options) {
   ctrl = this;
+
   /**
-   * this function calls a POST request to the google API to get Lat and Lng values
+   * this function in Location.js model; makes a post request to GoogleAPI for coordinates for the address, which are
+   * then used for a post request to our database for the data for radius around location
    */
 
   ctrl.fetchGeoCode = function() {
     var address = options.location.address();
-    return Location.postToFetchRestaurantData(address, function(res) {
-      options.location.lng(res.results[0].geometry.location.lng);
-      options.location.lat(res.results[0].geometry.location.lat);
-      console.log(res);
-    });
+    return Location.postToFetchRestaurantData(address, function cb(res) {
+      //set values on vm
+      options.location.lng(res.lng);
+      options.location.lat(res.lat);
+      //force a re-render so the graphs display with the new values
+      m.redraw();
+      toastr["success"]("Data successfully loaded for " + address);
+    })
   };
 };
 

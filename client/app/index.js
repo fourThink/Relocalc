@@ -14,6 +14,11 @@ var Auth = require('./models/Auth');
 
 window.Relocalc = {};
 
+/**
+ * The controller here creates a virtual model from Location which is passed into
+ * the map so that it has access to the lat & lng to render the map
+ */
+
 Relocalc.controller = function () {
   var ctrl = this;
   ctrl.location = Location.vm();
