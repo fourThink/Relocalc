@@ -1,4 +1,4 @@
-# Relocalc   --- to be formatted...looks fine when in edit mode.
+# Relocalc
 
 A resource for residents or businesses looking to move into Austin, TX. 
 Let the app calculate a grade of the area of your interest.
