@@ -1,28 +1,24 @@
 var m = require('mithril');
 var Searches = require('../models/Searches');
+var Auth = require('../models/Auth');
 
 exports.controller = function (options) {
   ctrl = this;
-  ctrl.searches = m.prop([]);
+  ctrl.searches = Searches.userSearches;
+  /*
   ctrl.fetchUserSearchList = function() {
-    return ctrl.searches([
-      {
-        address: "1110 Olive Street",
-        rating: 78
-      },
-      {
-        address: "234 Main Street",
-        rating: 87
-      }
-    ])
-  }
+    var user = window.checkUser();
+    Searches.fetchAllSearchesOfOneUser(user, function(res){
+      return res;
+    });
+  };
+  */
 };
 
 /**
  * The config m.route for links ensures the whole page is not refreshed when link is clicked
  * @param ctrl
  * @param options
- * @returns {*}
  */
 
 
@@ -31,12 +27,12 @@ exports.view = function (ctrl, options) {
     return m('.container',
         [m('.row.searchesContainer',
             [m('.panel.panel.default.col-md-8.col-md-offset-2',
-                [m('a.pull-right.redirect-link[href="/"]', "Return to main page", {config: m.route}), m('.panel-header', [m('h3', "Searches")]),
+                [m('a.pull-right.redirect-link[href="/"]', {config: m.route}, "Return to main page"), m('.panel-header', [m('h3', "Searches")]),
                   m('.panel-body',
-                      [m('.list-group', [ctrl.fetchUserSearchList().map(function (search, index) {
+                      [m('.list-group', [ctrl.searches().map(function (address) {
                             return m('.list-group-item', [
-                              m('span', search.address),
-                              m('span.pull-right', "Rating: " + search.rating)
+                              m('span', address),
+                              m('span.pull-right', "Rating: " + "Coming soon")
                             ])
                           })]
                       )]

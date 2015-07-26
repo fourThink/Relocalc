@@ -18,16 +18,16 @@ window.checkUser = function() {
 
 ref.onAuth(function(authData) {
   if(authData) {
-    console.log("logout state changed (+)" + authData);
+    console.log("Authentication state update (+)" + authData);
     return LoggedIn.userID = authData.uid;
   }
-  console.log("logout state changed (-)" + authData);
+  console.log("Authentication state update (-)" + authData);
   return LoggedIn.userID = null;
 });
 
 /**
  * AUTH MODEL
- * @type {{createUserAndLogin: Function, signIn: Function, logout: Function, isAuthenicated: Function}}
+ * @type {{createUserAndLogin: Function, signIn: Function, logout: Function, isAuthenticated: Function}}
  */
 
 var Auth = module.exports = {
@@ -41,7 +41,13 @@ var Auth = module.exports = {
         toastr["error"](error);
       } else {
         LoggedIn.userID = userData.uid;
-        Auth.signIn(email, password, cb)
+        Auth.signIn(email, password, cb);
+        var users = ref.child("users").child(userData.uid);
+        var userProfile = {
+          email: email,
+          searches: []
+        };
+        users.set(userProfile)
       }
     })
   },
@@ -63,14 +69,17 @@ var Auth = module.exports = {
     });
   },
 
-  logout : function() {
+  logout: function() {
     LoggedIn.userID = null;
     return ref.unauth();
   },
 
-  //not currently being used
+  /**
+   * probably a better way to check if a user is logged in anywhere than the getUser method above
+   * @returns {uid}
+   */
 
-  isAuthenicated: function() {
+  isAuthenticated: function() {
     var authData = ref.getAuth();
     if (authData) {
       console.log("User " + authData.uid + " is logged in with " + authData.provider);

@@ -31,9 +31,9 @@ signup.controller = function (options) {
   };
 
   function clearInputs () {
-    ctrl.email('')
-    ctrl.password('')
-    ctrl.error(null)
+    ctrl.email('');
+    ctrl.password('');
+    ctrl.error(null);
     flash = null
   }
 

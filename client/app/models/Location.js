@@ -1,6 +1,7 @@
 var m = require('mithril');
-var fbUrl = 'https://craply.firebaseio.com/'
-var maps = 'https://maps.googleapis.com/maps/api/geocode/'
+var Auth = require('./Auth');
+var fbUrl = 'https://craply.firebaseio.com/';
+var maps = 'https://maps.googleapis.com/maps/api/geocode/';
 
 /**
  * replaces blank spaces in submitted address with "+" per the Google API reqs
@@ -38,8 +39,10 @@ var Locations = module.exports = {
 
   postToFetchRestaurantData: function(address, cb) {
     console.log(address);
+    Locations.saveSearch(address);
     var cb = cb;
     this.postToFetchGeoCode(address, function (res) {
+      console.log("google", res);
       Locations.lat(res.results[0].geometry.location.lat);
       Locations.lng(res.results[0].geometry.location.lng);
       var locationData = {
@@ -52,11 +55,28 @@ var Locations = module.exports = {
       return m.request({method: "POST", url: "", 'Content-Type': 'application/json', data: locationData})
         .then(function(res) {
           var data = modelData(res);
-          Locations.search( data );
-            console.log(data);
-          return cb(data);
+          if (data !== null) {
+            Locations.search(data);
+          }
+            return cb(data);
         })
     });
+  },
+
+  saveSearch: function(address){
+    var user = Auth.isAuthenticated();
+    if(user) {
+      var ref = new Firebase(fbUrl + "users/" + user);
+      var searchRef = ref.child("searches");
+      //var ranNum = Math.floor(Math.random() * 100) + 1
+      searchRef.push(address, function (error) {
+        if (error) {
+          console.log("Search data could not be saved to FB" + error);
+        } else {
+          console.log("Search saved successfully to FB.");
+        }
+      })
+    }
   },
 
   vm: function(){
@@ -91,7 +111,12 @@ var modelData = function(data) {
     lng: Locations.lng()
   }
 
-  return response;
+  if(isNaN(response.restAvg)) {
+    toastr["error"]("No available data. Please check that the address");
+    return null;
+  } else {
+    return response;
+  }
 };
 
 /*
