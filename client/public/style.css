@@ -120,7 +120,7 @@ body {
 .card-holder {
   padding: 30px 30px 30px 30px; }
 
-div, input, form {
+div, input, form, .navbar, .form-control, .btn, .panel {
   border-radius: 20px;
   font-weight: 200; }
 
@@ -137,6 +137,31 @@ input {
 h1 {
   color: white;
   font-weight: 200; }
+
+.form-control:focus {
+  border-color: #cccccc;
+  -webkit-box-shadow: none;
+  box-shadow: none; }
+
+.btn:focus, .btn:active {
+  outline: none !important; }
+
+.search-form input[type="search"] {
+  -webkit-box-shadow: none;
+  outline: -webkit-focus-ring-color auto 0px; }
+
+textarea:focus, input:focus {
+  outline: 0; }
+
+.panel-heading {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px; }
+
+.list-group-item:first-child, .list-group-item:last-child {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px; }
 
 .searchesContainer {
   margin-top: 50px; }
