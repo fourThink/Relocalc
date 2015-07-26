@@ -16,9 +16,7 @@ var Searches = module.exports = {
 
   userSearches: m.prop([]),
 
-  fetchAllSearchesOfOneUser: function(user, cb){
-    var userId = Auth.isAuthenticated();
-    var ref = new Firebase(fbUrl + "users/").child(userId).child("searches");
+  fetchAllSearchesOfOneUser: function(cb){
     return ref.once("value", function(snapshot){
       cb(_.toArray(snapshot.val()));
     })
