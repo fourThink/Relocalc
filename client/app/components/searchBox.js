@@ -17,8 +17,10 @@ exports.controller = function (options) {
       options.location.lng(res.lng);
       options.location.lat(res.lat);
       //force a re-render so the graphs display with the new values
-      m.redraw();
-      toastr["success"]("Data successfully loaded for " + address);
+      if (res !== null) {
+        m.redraw();
+        toastr["success"]("Data successfully loaded for " + address);
+      }
     })
   };
 };
