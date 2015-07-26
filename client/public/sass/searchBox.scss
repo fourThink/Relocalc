@@ -133,6 +133,10 @@ h1 {
     box-shadow: none;
 }
 
+.btn:focus,.btn:active {
+   outline: none !important;
+}
+
 .search-form input[type="search"] {  
       -webkit-box-shadow: none;
       outline: -webkit-focus-ring-color auto 0px;
