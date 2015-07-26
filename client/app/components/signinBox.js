@@ -56,8 +56,8 @@ function renderLoggedOutView(ctrl){
          ]),
         m('div',
           [m('ul.nav.navbar-nav',
-            [m('li',[ m('a[href="/#/about"]', "About", {config: m.route})]),
-            m('li',[ m('a[href="/#/signup"]', "Signup", {config: m.route})])
+            [m('li',[ m('a[href="/about"]', {config: m.route},  "About")]),
+            m('li',[ m('a[href="/signup"]', {config: m.route}, "Signup")])
             ])
           ]),  //end div wrapping ul
         m('form.navbar-form.navbar-right', {onsubmit: ctrl.loginUser},
@@ -75,12 +75,12 @@ function renderLoggedOutView(ctrl){
 var renderLoggedInView = function(ctrl){
   return m('.container-fluid',
       [m('.navbar-header',
-        [m('a.navbar-brand[href="/#/"]', "Relocalc", {config: m.route})
+        [m('a.navbar-brand[href="/"]', {config: m.route}, "Relocalc")
       ]),
       m('div',
         [m('ul.nav.navbar-nav',
-          [m('li',[ m('a[href=/#/searches/' + window.checkUser() + ']', "Previous" +
-            " Searches", {config: m.route})])
+          [m('li',[ m('a[href=/searches/' + window.checkUser() + ']', {config: m.route}, "Previous" +
+            " Searches")])
           ])
         ]),
       m('.div',

@@ -10,7 +10,7 @@ About.view = function(ctrl, options){
   return  m('.container',
       [m('.row.searchesContainer',
           [m('.panel.panel.default.col-md-8.col-md-offset-2',
-              [m('a.pull-right.redirect-link[href="/#/"]', "Return to main page", {config: m.route}),
+              [m('a.pull-right.redirect-link[href="/"]', {config: m.route}, "Return to main page"),
                 m('.panel-header', [m('h3', "About")]),
                 m('.panel-body',
                   [m('h4', "Service"),
