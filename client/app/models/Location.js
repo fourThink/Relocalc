@@ -36,6 +36,8 @@ var Locations = module.exports = {
 
   lat: m.prop(''),
   lng: m.prop(''),
+  crimeWeight: m.prop(''),
+  restWeight: m.prop(''),
 
   postToFetchRestaurantData: function(address, cb) {
     console.log(address);

@@ -128,6 +128,11 @@ input {
   text-align: center;
   border: 0px; }
 
+input[type="range"] {
+  text-align: center;
+  margin: 0 auto;
+  display: block; }
+
 .resultsHeadline {
   text-align: center;
   font-size: 36px;
@@ -137,6 +142,17 @@ input {
 h1 {
   color: white;
   font-weight: 200; }
+
+h3, h4 {
+  text-align: center;
+  color: white;
+  font-weight: 200; }
+
+.slider {
+  text-align: center;
+  width: 75%;
+  margin: 0 auto;
+  margin-bottom: 20px; }
 
 .form-control:focus {
   border-color: #cccccc;
