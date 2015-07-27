@@ -187,6 +187,8 @@ textarea:focus, input:focus {
 
 .signup-container {
   margin-top: 30px; }
+  .signup-container h3 {
+    color: #2A373C; }
   .signup-container .signup-btn {
     background-color: #435359;
     color: white; }
