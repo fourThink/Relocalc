@@ -4,7 +4,7 @@ var fbUrl = 'https://craply.firebaseio.com/';
 var maps = 'https://maps.googleapis.com/maps/api/geocode/';
 
 /**
- * replaces blank spaces in submitted address with "+" per the Google API docs
+ * replaces blank spaces in submitted address with "+" per the Google API docs (not absolutely needed)
  * @param address
  * @returns {string}
  */
@@ -101,6 +101,12 @@ var Locations = module.exports = {
 
 };
 
+/**
+ * This does a little work on the data returned from the server before sending it to the views
+ * @param data
+ * @returns {Object}
+ */
+
 var modelData = function(data) {
   //Separate data into variables
   var inspectCount = 0;   
@@ -125,7 +131,7 @@ var modelData = function(data) {
     livability: data.livibility,
     cityRestAvg: data.meanRestInspecAvg,
     cityCrimeAvg: data.meanCrimesPerSqMi
-  }
+  };
 
   if(isNaN(response.restAvg)) {
     toastr["error"]("No available data. Please check that the address");
@@ -134,9 +140,3 @@ var modelData = function(data) {
     return response;
   }
 };
-
-/*
-Locations.postToFetchRestaurantData("300 Congress Ave Austin Tx", function(res) {
-  console.log(res);
-});
-*/

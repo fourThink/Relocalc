@@ -5,6 +5,8 @@ var ref = new Firebase(fb);
 
 /**
  * Global getter (checkUser) to access a local object with the current authenticated userID
+ * This allows you to check in who is logged in without a call to Firebase (useful when updating
+ * view states on the fly)
  */
 
 var LoggedIn = {};
@@ -32,15 +34,25 @@ ref.onAuth(function(authData) {
 
 var Auth = module.exports = {
 
+  /**
+   * This is called from the signup.js controller
+   * @param email
+   * @param password
+   * @param cb
+   * @returns {userData}
+   */
+
   createUserAndLogin: function(email, password, cb){
     return ref.createUser({
       email    : email,
       password : password
     }, function(error, userData) {
       if (error) {
+        //Toastr is a nice flash messaging plugin
         toastr["error"](error);
       } else {
         LoggedIn.userID = userData.uid;
+        //This now calls the login method below so the new user is logged in
         Auth.signIn(email, password, cb);
         var users = ref.child("users").child(userData.uid);
         var userProfile = {
@@ -51,6 +63,14 @@ var Auth = module.exports = {
       }
     })
   },
+
+  /**
+   * This is called from the signinBos.js controller
+   * @param email
+   * @param password
+   * @param cb
+   * @returns {userID}
+   */
 
   signIn: function(email, password, cb){
     var loggedIn = null;
@@ -75,7 +95,8 @@ var Auth = module.exports = {
   },
 
   /**
-   * probably a better way to check if a user is logged in anywhere than the getUser method above
+   * probably a better way a safer way check if a user is logged in anywhere than the getUser method above
+   * this is called from several places, such as when getting data in Searches.js to check the user
    * @returns {uid}
    */
 
