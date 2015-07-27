@@ -1,28 +1,6 @@
 var m = require('mithril');
 var Location = require('../models/Location');
 
-// var scoreCalculator = function() {
-//     var numCrimes = Location.search().crimes;
-//     var restScore = Location.search().restAvg;
-//     var crimeWeight = Number(Location.crimeWeight());
-//     var restWeight = Number(Location.restWeight());
-//     var crimeScore, overallScore;
-
-//     var totalWeight = crimeWeight + restWeight;
-
-//     //if crimeWeight and restWeight don't add up to 10, weight them both equally
-//     if (totalWeight !== 10) {
-//         crimeWeight = 5;
-//         restWeight = 5;
-//     }
-
-//     crimeScore = Math.floor((numCrimes / 1300) * 100 * -1 + 100);
-
-//     overallScore = Math.floor( (crimeScore * (crimeWeight/10)) +  (restScore * (restWeight/10)) );
-
-//     return overallScore;
-// };
-
 exports.controller = function(options) {
   ctrl = this;
 
@@ -30,6 +8,7 @@ exports.controller = function(options) {
     
     $(function () {
 
+      //these options affect the look of the gauge
       var gaugeOptions = {
 
         chart: {
@@ -63,7 +42,7 @@ exports.controller = function(options) {
             enabled: false
         },
 
-        // the value axis
+        // the value axis -- adjust color
         yAxis: {
             stops: [
                 [0.1, '#DF5353'], // red
@@ -93,7 +72,7 @@ exports.controller = function(options) {
         }
     };
 
-    // The speed gauge
+    // attach the gauge to the DOM filling it out with gaugeOptions
     $('.gaugeContainer').highcharts(Highcharts.merge(gaugeOptions, {
         yAxis: {
             min: 0,

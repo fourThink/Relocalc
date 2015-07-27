@@ -6,8 +6,6 @@ var SearchList = require('./components/searchList');
 var Signup = require('./components/signup');
 var Gauge = require('./components/livabilityGauge');
 var Graphs = require('./components/graphContainer');
-var RestaurantSafety = require('./components/restaurantSafety');
-var RestaurantNumber = require('./components/restaurantNumber');
 var About = require('./components/about');
 var Location = require('./models/Location');
 var Auth = require('./models/Auth');
@@ -27,6 +25,7 @@ Relocalc.controller = function () {
 Relocalc.view = function (ctrl) {
   return m('div',
           [m('.row', [ m.component(SigninBox) ]),
+           m('.row .headline', 'Relocalc'),
            m('.row', [ m.component(SearchBox, { location: ctrl.location }) ]),
            m('.resultsHeadline', 'Your Results'),
            m('.row', [ m.component(Map, { location: ctrl.location }), m.component(Gauge) ]),

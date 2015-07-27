@@ -1,124 +1,12 @@
-.gaugeContainer {
-  width: 50%;
-  height: 100%; }
-
-.crimeGraph .restaurantSafety .restaurantNumber {
-  height: 100%;
-  width: 100%;
-  margin: 0 auto;
-  padding: 100px; }
-
-.row {
-  margin-top: 20px;
-  margin-bottom: 20px; }
-
-.col-sm-4 {
-  border-radius: 10px; }
-
-.mapContainer {
-  height: 400px;
-  width: 50%;
-  padding: 100px;
-  margin: 0 auto; }
-
-.logout-btn {
-  margin-top: 8px;
-  margin-right: 8px;
-  background-color: #435359;
-  color: white; }
-
-.login-btn {
-  background-color: #435359;
-  color: white; }
-
-.navbar-login {
-  margin-right: 6px; }
-
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
+/* BEGIN general styling */
 body {
-  /*background: url(https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg) no-repeat center center fixed;*/
   background-color: #435359;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   font-family: 'Roboto', sans-serif; }
-
-.addressInput-card {
-  padding: 10px 25px 25px 25px;
-  width: 100%;
-  background-color: #2A373C;
-  margin: 0 auto 10px;
-  border-radius: 20px;
-  /*box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);*/
-  overflow: hidden; }
-
-.addressInput-card h1 {
-  font-weight: 200;
-  text-align: center;
-  font-size: 2.7em; }
-
-.addressInput-submit {
-  width: 100%;
-  height: 44px;
-  display: block;
-  margin-bottom: 10px;
-  position: relative; }
-
-.addressInput-card input[type=text] {
-  height: 44px;
-  font-size: 18px;
-  width: 100%;
-  margin-bottom: 10px;
-  -webkit-appearance: none;
-  background: #fff;
-  /*border: 1px solid #d9d9d9;*/
-  /*border-top: 1px solid #c0c0c0;*/
-  border-radius: 20px;
-  padding: 0 8px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box; }
-
-.addressInput-card.address:hover {
-  /*border: 1px solid #b9b9b9;*/
-  /*border-top: 1px solid #a0a0a0;*/
-  /*-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);*/ }
-
-.addressInput-submit {
-  text-align: center;
-  font-size: 24px;
-  font-family: 'Arial', sans-serif;
-  font-weight: 200;
-  height: 45px;
-  padding: 0 8px;
-  border-radius: 20px;
-  /* -webkit-user-select: none;
-    user-select: none; */ }
-
-.addressInput-submit {
-  /* border: 1px solid #3079ed; */
-  border: 0px;
-  color: #fff;
-  text-shadow: 0 1px rgba(0, 0, 0, 0.1);
-  background-color: #192C33;
-  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */ }
-
-.addressInput-submit:hover {
-  /* border: 1px solid #2f5bb7; */
-  border: 0px;
-  /*text-shadow: 0 1px rgba(0,0,0,0.3);*/
-  background-color: #2A373C;
-  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */ }
-
-.addressInput-help {
-  width: 100%;
-  text-align: center;
-  font-size: 12px; }
-
-.card-holder {
-  padding: 30px 30px 30px 30px; }
 
 div, input, form, .navbar, .form-control, .btn, .panel {
   border-radius: 20px;
@@ -154,6 +42,62 @@ h3, h4 {
   margin: 0 auto;
   margin-bottom: 20px; }
 
+.panel-heading {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px; }
+
+.list-group-item:first-child, .list-group-item:last-child {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px; }
+
+.headline {
+  color: white;
+  font-size: 100px;
+  text-align: center;
+  font-weight: 200;
+  margin-top: -20px; }
+
+.row {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+.col-sm-4 {
+  border-radius: 10px; }
+
+/* END general styling */
+
+.crimeGraph .restaurantSafety .restaurantNumber {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 100px; }
+
+.gaugeContainer {
+  width: 50%;
+  height: 100%; }
+
+.mapContainer {
+  height: 400px;
+  width: 50%;
+  padding: 100px;
+  margin: 0 auto; }
+
+.logout-btn {
+  margin-top: 8px;
+  margin-right: 8px;
+  background-color: #435359;
+  color: white; }
+
+.login-btn {
+  background-color: #435359;
+  color: white; }
+
+.navbar-login {
+  margin-right: 6px; }
+
+/* BEGIN this section removes default blue borders when buttons and form inputs are selected */
 .form-control:focus {
   border-color: #cccccc;
   -webkit-box-shadow: none;
@@ -169,15 +113,70 @@ h3, h4 {
 textarea:focus, input:focus {
   outline: 0; }
 
-.panel-heading {
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px; }
+/* END this section removes default blue borders when buttons and form inputs are selected */
 
-.list-group-item:first-child, .list-group-item:last-child {
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px; }
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
+/* BEGIN searchBox specific styling */
+.addressInput-card {
+  padding: 10px 25px 25px 25px;
+  width: 100%;
+  background-color: #2A373C;
+  margin: 0 auto 10px;
+  border-radius: 20px;
+  overflow: hidden; }
+
+.addressInput-card h1 {
+  font-weight: 200;
+  text-align: center;
+  font-size: 2.7em; }
+
+.addressInput-submit {
+  width: 100%;
+  height: 44px;
+  display: block;
+  margin-bottom: 10px;
+  position: relative; }
+
+.addressInput-card input[type=text] {
+  height: 44px;
+  font-size: 18px;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border-radius: 20px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box; }
+
+.addressInput-submit {
+  text-align: center;
+  font-size: 24px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 200;
+  height: 45px;
+  padding: 0 8px;
+  border-radius: 20px; }
+
+.addressInput-submit {
+  border: 0px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+  background-color: #192C33; }
+
+.addressInput-submit:hover {
+  border: 0px;
+  background-color: #758084; }
+
+.addressInput-help {
+  width: 100%;
+  text-align: center;
+  font-size: 12px; }
+
+.card-holder {
+  padding: 30px 30px 30px 30px; }
+
+/* END searchBox styling */
 
 .searchesContainer {
   margin-top: 50px; }
@@ -194,7 +193,3 @@ textarea:focus, input:focus {
   .signup-container .signup-btn {
     background-color: #435359;
     color: white; }
-
-.loader {
-  margin-left: 400px;
-  margin-top: 50px; }

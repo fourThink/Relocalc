@@ -3,21 +3,11 @@
 // COLOR VARIABLES
 $background_color: #2A373C; //card
 $submit_btn: #192C33;
-$submit_btn_hover: #2A373C;
+$submit_btn_hover: #758084;
 $border_radius: 20px;
 $font_weight: 200;
 
-
-
-body {
-  /*background: url(https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg) no-repeat center center fixed;*/
-  background-color:#435359;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  font-family: 'Roboto', sans-serif;
-}
+/* BEGIN searchBox specific styling */
 
 .addressInput-card {
   padding: 10px 25px 25px 25px;
@@ -25,7 +15,6 @@ body {
   background-color: $background_color;
   margin: 0 auto 10px;
   border-radius: $border_radius;
-  /*box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);*/
   overflow: hidden;
 }
 
@@ -50,20 +39,10 @@ body {
   margin-bottom: 10px;
   -webkit-appearance: none;
   background: #fff;
-  /*border: 1px solid #d9d9d9;*/
-  /*border-top: 1px solid #c0c0c0;*/
   border-radius: $border_radius; 
   padding: 0 8px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
-}
-
-.addressInput-card.address:hover {
-  /*border: 1px solid #b9b9b9;*/
-  /*border-top: 1px solid #a0a0a0;*/
-  /*-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);*/
 }
 
 .addressInput-submit {
@@ -74,25 +53,18 @@ body {
   height: 45px;
   padding: 0 8px;
   border-radius: $border_radius; 
-  /* -webkit-user-select: none;
-    user-select: none; */
 }
 
 .addressInput-submit {
-  /* border: 1px solid #3079ed; */
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1);
   background-color: $submit_btn;
- /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
 }
 
 .addressInput-submit:hover {
-  /* border: 1px solid #2f5bb7; */
   border: 0px;
-  /*text-shadow: 0 1px rgba(0,0,0,0.3);*/
   background-color: $submit_btn_hover;
-  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
 }
 
 .addressInput-help {
@@ -105,74 +77,4 @@ body {
   padding: 30px 30px 30px 30px;
 }
 
-div, input, form, .navbar, .form-control, .btn, .panel {
-  border-radius: $border_radius;
-  font-weight: $font_weight;
-}
-
-input {
-  text-align: center;
-  border: 0px;
-}
-
-input[type="range"] {
-  text-align: center;
-  margin: 0 auto;
-  display: block;
-}
-
-.resultsHeadline {
-  text-align: center;
-  font-size: 36px;
-  color: white;
-  font-weight: $font_weight;
-}
-
-h1 {
-  color: white;
-  font-weight: $font_weight;
-}
-
-h3, h4 {
-  text-align: center;
-  color: white;
-  font-weight: $font_weight;
-}
-
-.slider {
-  text-align: center;
-  width: 75%;
-  margin: 0 auto;
-  margin-bottom: 20px;
-}
-
-.form-control:focus{
-    border-color: #cccccc;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-
-.btn:focus,.btn:active {
-   outline: none !important;
-}
-
-.search-form input[type="search"] {  
-      -webkit-box-shadow: none;
-      outline: -webkit-focus-ring-color auto 0px;
-}
-
-textarea:focus, input:focus{
-    outline: 0;
-}
-
-.panel-heading {
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-}
-
-.list-group-item:first-child, .list-group-item:last-child {
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-}
+/* END searchBox styling */
