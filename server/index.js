@@ -1,50 +1,74 @@
 var browserify = require('browserify-middleware');
-var bodyParser = require('body-parser')
-var search = require('./lib/search.js')
+var bodyParser = require('body-parser');
+var search = require('./lib/search.js');
 var express = require('express');
-var app = express()
+var app = express();
 //var db = require('./lib/db.js');
-var Restaurant = require('./models/restaurant.js')
+var Restaurant = require('./models/restaurant.js');
+var httpResponseBody = require('./lib/httpResponseBody.js');
+var calculateLivibility = require('./lib/calculateLivibility.js');
 
 //provide a browserified f;ile at a path
-var shared = ['mithril']
+var shared = ['mithril'];
 app.get('/js/vendor-bundle.js', browserify(shared));
 app.get('/js/app-bundle.js', browserify('./client/app/index.js', { external: shared }));
 
 
-// Non-js static files
 app.use(bodyParser.json());
+
+// Non-js static files
 app.use(express.static('client/public'));
 
-app.get('/restaurant', function (req, res){
- console.log('looking for restaurant!!')
+app.get('/', function (req, res){
+ console.log('looking for restaurant!!');
  return Restaurant.getInspections('2801033')
  .then( function (restaurantList){
    res.json(restaurantList);
- })
+ });
 });
 
-app.get('/crimes', function (req, res){});
+//app.get('/crimes', function (req, res){});
+
 
 app.post('/', function (req, res){
-  var data = {};
+  function milestoMeters(miles){
+    return miles / 0.00062137;
+  }
   var circle = {
   	latitude: req.body.lat,
   	longitude: req.body.lng,
-  	meters: (req.body.radius || 1) / .00062137,
-  }
+  	meters: milestoMeters(req.body.radius || 1) ,
+  };
+  console.log('meters: ' + circle.meters);
   search('Crime', circle)
-  .then(function (crimes){
-  	data.crimes = crimes;
+  .then(function attachCrimestoHttpResponse(crimes){
+  	httpResponseBody.crimes = crimes;
+  });
+  return search('Restaurant', circle)
+  .then(function attachRestaurantsToHttpResponse(restaurants){
+  	httpResponseBody.restaurants = restaurants;
+  	return httpResponseBody;
+    //return res.json(httpResponseBody);
   })
-  search('Restaurant', circle)
-  .then(function (restaurants){
-  	console.log(restaurants)
-  	data.restaurants = restaurants
-  	return res.json(data);
+  .then(function attachSearchInspectionAvgToHttpResponse(httpResponseBody){
+    var count = 0;
+    var sum = httpResponseBody.restaurants.reduce(function findInspectionAvgFromSearch(total, rest){
+      rest.avg && ++count;
+      return rest.avg ? total += rest.avg : total;
+    }, 0);
+    httpResponseBody.searchInspecAvg = sum / count;
+    return httpResponseBody;
   })
-})
+  .then(function (httpResponseBody){
+    var weights = req.body.weights || {restaurants: 50, crimes: 50};
+    calculateLivibility(weights, httpResponseBody, req.body.radius);
+    console.log(Object.keys(httpResponseBody));
+    //console.log(weights)
+    res.json(httpResponseBody);
+  });
+});
 
 var port = process.env.PORT || 4000;
 app.listen(port);
 console.log("Listening on port", port);
+
