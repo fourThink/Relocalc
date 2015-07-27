@@ -70,7 +70,6 @@ module.exports = function attachStatsToHttpResponeBody(weights, httpResponseBody
     //console.log(scaleWeights(weights))
     //console.log(key + ' score is ' + calculateScore(handler, 1))
   	//console.log(key + ' score is ' + calculateScore(handler, val/100))
->>>>>>> fixed error in livibility calculation
   	return score += calculateScore(linEqHandler(httpResponseBody, key), val/100)
 
   }, 0);
