@@ -32,6 +32,7 @@ exports.view = function (ctrl, options) {
         [m('form[role="form", type="post"]', {onsubmit: ctrl.fetchGeoCode},
             [m('input.addressInput.address[type="text"][placeholder="Enter an Austin address (Example: 700 San Jacinto, Austin, TX 78701)"]',
               {value: options.location.address(),
+                //this could be refactored to to use m.withAttr to set the values...
               onchange: function(e){ options.location.address(e.currentTarget.value); }}
             )],
             [m('h3',  "On a scale of 0-100, how important are these criteria in your search?")],

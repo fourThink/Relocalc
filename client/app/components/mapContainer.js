@@ -43,7 +43,7 @@ function mapSetup(options, element, isInitialized) {
         return 8;
       }
     };
-
+    //notice that the locations object has m.prop setters/getters which are from a virtual model
     var lat = options.location.lat() || 30.25;
     var lng = options.location.lng() || -97.75;
 

@@ -4,6 +4,12 @@ var Auth = require('../models/Auth');
 
 var searchList = module.exports = {};
 
+/**
+ * One key property here, an array of searches which is set on the Search.js model and updayted with
+ * fetchUserSearchesOfOneUser method....yeah we like long variable names
+ * @param options (not used)
+ */
+
 searchList.controller = function (options) {
   ctrl = this;
 
@@ -12,7 +18,6 @@ searchList.controller = function (options) {
   };
 
   ctrl.searches = Searches.userSearches;
-  console.log("in the ctrl", ctrl.searches());
 };
 
 /**
@@ -48,7 +53,7 @@ searchList.view = function (ctrl, options) {
 };
 
 function renderList(ctrl) {
-  ctrl.fetchUserSearchList();
+  ctrl.fetchUserSearchList(); //update the data here!
   return [m('.list-group', [ctrl.searches().map(function (search) {
         return m('.list-group-item', [
           m('span', search.address),
