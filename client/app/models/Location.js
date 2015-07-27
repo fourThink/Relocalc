@@ -53,13 +53,15 @@ var Locations = module.exports = {
         "lng": res.results[0].geometry.location.lng,
         "radius": 1,
         "weights": {
-          "restaurants": Locations.crimeWeight(),
-          "crimes": Locations.restWeight()
+          "restaurants": Locations.crimeWeight() || 50,
+          "crimes": Locations.restWeight() || 50
         }
       };
       console.log(locationData);
       return m.request({method: "POST", url: "", 'Content-Type': 'application/json', data: locationData})
         .then(function(res) {
+          console.log(res);
+          console.log(Object.keys(res));
           var data = modelData(res);
           if (data !== null) {
             Locations.search(data);
@@ -113,9 +115,11 @@ var modelData = function(data) {
     restaurants: data.restaurants.length,
     lat: Locations.lat(),
     lng: Locations.lng(),
-    restAvg: data.searchInspecAvg || 75,
-    crimeAvg: data.searchCrimesPerSqMi || 75,
-    livibility: data.livibility || 75
+    restAvg: data.searchInspecAvg,
+    crimeAvg: data.searchCrimesPerSqMi,
+    livability: data.livibility,
+    cityRestAvg: data.meanRestInspecAvg,
+    cityCrimeAvg: data.meanCrimesPerSqMi
   }
 
   if(isNaN(response.restAvg)) {

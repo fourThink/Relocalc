@@ -15,7 +15,7 @@ exports.controller = function(options) {
                     spacing: 50,
                 },
                 title: {
-                    text: 'Crime Comparison'
+                    text: 'Crime Rate (Adjusted)'
                 },
                 yAxis: {
                     title: {
@@ -24,10 +24,10 @@ exports.controller = function(options) {
                 },
                 series: [{
                     name: 'Your Search',
-                    data: [Location.search().crimes]
+                    data: [Math.floor(Location.search().crimeAvg)]
                 }, {
                     name: 'City of Austin (average)',
-                    data: [144]
+                    data: [Math.floor(Location.search().cityCrimeAvg)]
                 }]
             });
         });
@@ -45,7 +45,7 @@ exports.controller = function(options) {
                     spacing: 50
                 },
                 title: {
-                    text: 'Restaurant Safety'
+                    text: 'Restaurant Score (Adjusted)'
                 },
                 yAxis: {
                     title: {
@@ -57,7 +57,7 @@ exports.controller = function(options) {
                     data: [Math.floor(Location.search().restAvg)]
                 }, {
                     name: 'City of Austin (average)',
-                    data: [70]
+                    data: [Math.floor(Location.search().cityRestAvg)]
                 }]
             });
         });
@@ -87,7 +87,7 @@ exports.controller = function(options) {
                     data: [Location.search().restaurants]
                 }, {
                     name: 'City of Austin (average)',
-                    data: [51]
+                    data: Location.search().restaurants ? [51] : [0]
                 }]
             });
         });
