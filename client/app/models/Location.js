@@ -4,7 +4,7 @@ var fbUrl = 'https://craply.firebaseio.com/';
 var maps = 'https://maps.googleapis.com/maps/api/geocode/';
 
 /**
- * replaces blank spaces in submitted address with "+" per the Google API reqs
+ * replaces blank spaces in submitted address with "+" per the Google API docs
  * @param address
  * @returns {string}
  */
@@ -74,7 +74,6 @@ var Locations = module.exports = {
     if(user) {
       var ref = new Firebase(fbUrl + "users/" + user);
       var searchRef = ref.child("searches");
-      //var ranNum = Math.floor(Math.random() * 100) + 1
       searchRef.push(address, function (error) {
         if (error) {
           console.log("Search data could not be saved to FB" + error);
@@ -89,7 +88,7 @@ var Locations = module.exports = {
     return {
       address: m.prop(''),
       lat: m.prop(''),
-      lng: m.prop(''),
+      lng: m.prop('')
     }
   }
 
@@ -117,7 +116,7 @@ var modelData = function(data) {
     livibility: data.livibility,
     lat: Locations.lat(),
     lng: Locations.lng()
-  }
+  };
 
   if(isNaN(response.restAvg)) {
     toastr["error"]("No available data. Please check that the address");

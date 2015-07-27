@@ -109,7 +109,7 @@ exports.controller = function(options) {
 
         series: [{
             name: 'Score',
-            data: [Location.search().livability],
+            data: [Location.search().livibility],
             dataLabels: {
                 format: '<div style="text-align:center"><span style="font-size:48px;color:' +
                     ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
