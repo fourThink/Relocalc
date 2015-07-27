@@ -5,7 +5,7 @@ Let the app calculate a grade for the area of your interest.
 
 ## Overview
 
-Relocal is a Mithril/Express/Postgres/Browserify web application that taps into various Austin Open Data API's using data from https://data.austintexas.gov/.
+Relocal is a Mithril/Express/Postgres/Browserify web application that taps into various Austin Open Data API's using data from https://data.austintexas.gov.
 Each address will produce a livability score based on an algorithm which uses the available data.
 The end user will be able to compare the results of particular data for an address entered with Austin averages.
 In addition, the user will be able to scale the importance of each element to receive a weighted result depending on 
