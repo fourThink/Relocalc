@@ -51,7 +51,11 @@ var Locations = module.exports = {
         "address": address,
         "lat": res.results[0].geometry.location.lat,
         "lng": res.results[0].geometry.location.lng,
-        "radius": 1
+        "radius": 1,
+        "weights": {
+          "restaurants": Locations.crimeWeight(),
+          "crimes": Locations.restWeight()
+        }
       };
       console.log(locationData);
       return m.request({method: "POST", url: "", 'Content-Type': 'application/json', data: locationData})
@@ -108,7 +112,9 @@ var modelData = function(data) {
   var response = {
     crimes: data.crimes.length,
     restaurants: data.restaurants.length,
-    restAvg: avg,
+    restAvg: data.searchInspecAvg,
+    crimeAvg: data.searchCrimesPerSqMi,
+    livibility: data.livibility,
     lat: Locations.lat(),
     lng: Locations.lng()
   }

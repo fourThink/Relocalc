@@ -1,27 +1,27 @@
 var m = require('mithril');
 var Location = require('../models/Location');
 
-var scoreCalculator = function() {
-    var numCrimes = Location.search().crimes;
-    var restScore = Location.search().restAvg;
-    var crimeWeight = Number(Location.crimeWeight());
-    var restWeight = Number(Location.restWeight());
-    var crimeScore, overallScore;
+// var scoreCalculator = function() {
+//     var numCrimes = Location.search().crimes;
+//     var restScore = Location.search().restAvg;
+//     var crimeWeight = Number(Location.crimeWeight());
+//     var restWeight = Number(Location.restWeight());
+//     var crimeScore, overallScore;
 
-    var totalWeight = crimeWeight + restWeight;
+//     var totalWeight = crimeWeight + restWeight;
 
-    //if crimeWeight and restWeight don't add up to 10, weight them both equally
-    if (totalWeight !== 10) {
-        crimeWeight = 5;
-        restWeight = 5;
-    }
+//     //if crimeWeight and restWeight don't add up to 10, weight them both equally
+//     if (totalWeight !== 10) {
+//         crimeWeight = 5;
+//         restWeight = 5;
+//     }
 
-    crimeScore = Math.floor((numCrimes / 1300) * 100 * -1 + 100);
+//     crimeScore = Math.floor((numCrimes / 1300) * 100 * -1 + 100);
 
-    overallScore = Math.floor( (crimeScore * (crimeWeight/10)) +  (restScore * (restWeight/10)) );
+//     overallScore = Math.floor( (crimeScore * (crimeWeight/10)) +  (restScore * (restWeight/10)) );
 
-    return overallScore;
-};
+//     return overallScore;
+// };
 
 exports.controller = function(options) {
   ctrl = this;
@@ -109,7 +109,7 @@ exports.controller = function(options) {
 
         series: [{
             name: 'Score',
-            data: [scoreCalculator()],
+            data: [Location.search().livability],
             dataLabels: {
                 format: '<div style="text-align:center"><span style="font-size:48px;color:' +
                     ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +

@@ -27,19 +27,19 @@ exports.controller = function (options) {
 exports.view = function (ctrl, options) {
   return m('.row', [
     m('.card-holder',[
-  m('.addressInput-card',
-      [m('h1',  "Relocalc"),
-        [m('form[role="form"]', {onsubmit: ctrl.fetchGeoCode},
+  m('.addressInput-card',[
+      [m('h1',  "Relocalc")],
+        [m('form[role="form", type="post"]', {onsubmit: ctrl.fetchGeoCode},
             [m('input.addressInput.address[type="text"][placeholder="Enter an Austin address (Example: 700 San Jacinto, Austin, TX 78701)"]',
               {value: options.location.address(),
               onchange: function(e){ options.location.address(e.currentTarget.value); }}
             )],
-            [m('h3',  "On a scale of 0-10, how important are these criteria in your search?")],
+            [m('h3',  "On a scale of 0-100, how important are these criteria in your search?")],
                 [m('.col-sm-6',
                   [m('h4', 'Crime Rate: ' + Location.crimeWeight())],
                     [m('.slider',
                       [m('input[type="range"]'
-                        ,{min: 0, max: 10, step: 1, value: Location.crimeWeight(), onchange: m.withAttr('value', Location.crimeWeight)}
+                        ,{min: 0, max: 100, step: 1, value: Location.crimeWeight(), onchange: m.withAttr('value', Location.crimeWeight)}
                       )]
                     )]
                 )],
@@ -47,15 +47,15 @@ exports.view = function (ctrl, options) {
                   [m('h4', 'Food Safety: ' + Location.restWeight())],
                     [m('.slider',
                       [m('input[type="range"]'
-                        ,{min: 0, max: 10, step: 1, value: Location.restWeight(), onchange: m.withAttr('value', Location.restWeight)}
+                        ,{min: 0, max: 100, step: 1, value: Location.restWeight(), onchange: m.withAttr('value', Location.restWeight)}
                       )]
                     )]
-                )] //input form
+                )],
+            [m('input.addressInput.addressInput-submit[type="submit"][value="Try your luck"]')] //input form
         ),  //form-group
-        m('input.addressInput.addressInput-submit[type="submit"][value="Try your luck"]')]
       ] //form
-    )//searchBox
+    ])//searchBox
   ])
-])
+  ])
 };
 
