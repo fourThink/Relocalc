@@ -17,6 +17,9 @@ exports.controller = function(options) {
                 title: {
                     text: 'Crime Rate (Adjusted)'
                 },
+                xAxis: {
+                    categories: ['']
+                },      
                 yAxis: {
                     title: {
                         text: 'Crimes Reported: Jan 2015 - Present'
@@ -28,7 +31,14 @@ exports.controller = function(options) {
                 }, {
                     name: 'City of Austin (average)',
                     data: [Math.floor(Location.search().cityCrimeAvg)]
-                }]
+                }],
+                tooltip: {
+                    useHTML: true,
+                    headerFormat: '<small>{point.key}</small><table>',
+                    pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
+                        '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+                    footerFormat: '</table>',
+                }
             });
         });
   
@@ -47,6 +57,9 @@ exports.controller = function(options) {
                 title: {
                     text: 'Restaurant Score (Adjusted)'
                 },
+                xAxis: {
+                    categories: ['']
+                },
                 yAxis: {
                     title: {
                         text: 'Average Health Inspection Rating (2015)'
@@ -58,7 +71,14 @@ exports.controller = function(options) {
                 }, {
                     name: 'City of Austin (average)',
                     data: [Math.floor(Location.search().cityRestAvg)]
-                }]
+                }],
+                 tooltip: {
+                    useHTML: true,
+                    headerFormat: '<small>{point.key}</small><table>',
+                    pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
+                        '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+                    footerFormat: '</table>',
+                }
             });
         });
   
@@ -77,6 +97,9 @@ exports.controller = function(options) {
                 title: {
                     text: 'Number of Restaurants'
                 },
+                xAxis: {
+                    categories: ['']
+                },
                 yAxis: {
                     title: {
                         text: 'Restaurants per square mile'
@@ -88,7 +111,14 @@ exports.controller = function(options) {
                 }, {
                     name: 'City of Austin (average)',
                     data: Location.search().restaurants ? [51] : [0]
-                }]
+                }],
+                 tooltip: {
+                    useHTML: true,
+                    headerFormat: '<small>{point.key}</small><table>',
+                    pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
+                        '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+                    footerFormat: '</table>',
+                }
             });
         });
   
