@@ -19,6 +19,10 @@ signup.controller = function (options) {
       Auth.createUserAndLogin( ctrl.email(), ctrl.password(), function( success, error ) {
         clearInputs();
         if (success) {
+          /**
+           * all the toastr flash messages are part of a nifty plug-in which give custom error messages
+           * check out their website for more info!
+           */
           toastr["success"]("Your Relocalc account is created!");
           m.route("/");
         }
@@ -50,12 +54,6 @@ signup.controller = function (options) {
     return !emailMatch.test(email) || !passMatch.test(password);
   }
 
-  var flash = null
-  ctrl.getFlash = function () {
-    var temp = flash
-    flash = null
-    return temp
-  }
 };
 
 signup.view = function (ctrl, options) {
@@ -88,6 +86,8 @@ function signUpForm() {
     m('input.btn.btn-default.btn-lg.pull-right.signup-btn[type="submit"][value="Signup"]', {onclick: ctrl.signup}),
   ]
 }
+
+// this is really extra as the flash toastr flash messages already do the job
 
 function errorView(ctrl) {
   var errorObj = ctrl.error() || ctrl.warning;

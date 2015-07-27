@@ -1,5 +1,9 @@
 var m = require('mithril');
 
+/**
+ * Simple about page with no state
+ * @type {{}}
+ */
 var About = module.exports = {};
 
 About.controller = function(options){
