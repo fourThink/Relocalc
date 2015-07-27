@@ -8,8 +8,8 @@ var logDebug = function(string){
 //The purpose is to make sure the weights add up to 100, but maintains ratios to one another.
 var scaleWeights = function(weights){
   var sum = _.reduce(weights, function (tot, weight){
-    return tot += weight;
-  })
+    return tot += +weight;
+  }, 0)
   return _.each(weights, function (weight, key){
     weights[key] = weight * 100 / sum;
   })
@@ -66,7 +66,7 @@ module.exports = function attachStatsToHttpResponeBody(weights, httpResponseBody
   httpResponseBody.searchCrimesPerSqMi = (httpResponseBody.crimes.length / (Math.PI * radius * radius));  
   httpResponseBody.livibility = _.reduce(scaleWeights(weights), function findPartialLivibility(score, val, key){
     //handler = linEqHandler(httpResponseBody, key);
-    //console.log('weight ' + val)
+    console.log('weight ' + val)
   	//console.log(key + ' score is ' + calculateScore(handler, 1))
   	return score += calculateScore(linEqHandler(httpResponseBody, key), val/100)
 
