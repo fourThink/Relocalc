@@ -7,11 +7,12 @@ var searchList = module.exports = {};
 searchList.controller = function (options) {
   ctrl = this;
 
-  ctrl.searches = Searches.userSearches;
-
   ctrl.fetchUserSearchList = function() {
-    setTimeout(Searches.fetchAllSearchesOfOneUser,500);
+    Searches.fetchAllSearchesOfOneUser();
   };
+
+  ctrl.searches = Searches.userSearches;
+  console.log("in the ctrl", ctrl.searches());
 };
 
 /**
