@@ -59,18 +59,23 @@ var linEq = function(handler){
 var calculateScore = function(handler, weight){
   var score = linEq(handler);
   return score < 0 ? 0 :
-    score > 100 ? weight : score * weight
+    score > 100 ? weight * 100 : score * weight
 }
 
 module.exports = function attachStatsToHttpResponeBody(weights, httpResponseBody, radius){
   httpResponseBody.searchCrimesPerSqMi = (httpResponseBody.crimes.length / (Math.PI * radius * radius));  
   httpResponseBody.livibility = _.reduce(scaleWeights(weights), function findPartialLivibility(score, val, key){
     handler = linEqHandler(httpResponseBody, key);
-    console.log('weight ' + val)
-  	console.log(key + ' score is ' + calculateScore(handler, 1))
+    //console.log('weight ' + val)
+    //console.log(scaleWeights(weights))
+    //console.log(key + ' score is ' + calculateScore(handler, 1))
+  	//console.log(key + ' score is ' + calculateScore(handler, val/100))
+>>>>>>> fixed error in livibility calculation
   	return score += calculateScore(linEqHandler(httpResponseBody, key), val/100)
 
   }, 0);
   logDebug('livibility = ' + httpResponseBody.livibility)
+  logDebug('searchCrimesPerSqMi = ' + httpResponseBody.searchCrimesPerSqMi)
+  logDebug('searchCrimesPerSqMi = ' + httpResponseBody.crimes.length)
   //console.log(logMessage + 'livibility = ' + httpResponseBody.livibility)
 }

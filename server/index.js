@@ -6,7 +6,7 @@ var app = express();
 //var db = require('./lib/db.js');
 var Restaurant = require('./models/restaurant.js');
 var httpResponseBody = require('./lib/httpResponseBody.js');
-var calculateLivibility = require('./lib/calculateLivibility.js');
+var calculateLivability = require('./lib/calculateLivability.js');
 
 //provide a browserified f;ile at a path
 var shared = ['mithril'];
@@ -61,7 +61,7 @@ app.post('/', function (req, res){
   })
   .then(function (httpResponseBody){
     var weights = req.body.weights || {restaurants: 50, crimes: 50};
-    calculateLivibility(weights, httpResponseBody, req.body.radius);
+    calculateLivability(weights, httpResponseBody, req.body.radius);
     console.log(Object.keys(httpResponseBody));
     //console.log(weights)
     res.json(httpResponseBody);
