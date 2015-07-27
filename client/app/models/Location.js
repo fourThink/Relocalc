@@ -38,10 +38,10 @@ var Locations = module.exports = {
   lng: m.prop(''),
   crimeWeight: m.prop(''),
   restWeight: m.prop(''),
+  address: m.prop(''),
 
   postToFetchRestaurantData: function(address, cb) {
-    console.log(address);
-    Locations.saveSearch(address);
+    Locations.address(address);
     var cb = cb;
     this.postToFetchGeoCode(address, function (res) {
       console.log("google", res);
@@ -66,17 +66,22 @@ var Locations = module.exports = {
           if (data !== null) {
             Locations.search(data);
           }
+            Locations.saveSearch(Locations.address(), res.livibility);
             return cb(data);
         })
     });
   },
 
-  saveSearch: function(address){
+  saveSearch: function(address, livabilityScore){
     var user = Auth.isAuthenticated();
     if(user) {
       var ref = new Firebase(fbUrl + "users/" + user);
       var searchRef = ref.child("searches");
-      searchRef.push(address, function (error) {
+      var search = {
+        "address": address,
+        "livability": livabilityScore
+      }
+      searchRef.push(search, function (error) {
         if (error) {
           console.log("Search data could not be saved to FB" + error);
         } else {

@@ -49,10 +49,10 @@ searchList.view = function (ctrl, options) {
 
 function renderList(ctrl) {
   ctrl.fetchUserSearchList();
-  return [m('.list-group', [ctrl.searches().map(function (address) {
+  return [m('.list-group', [ctrl.searches().map(function (search) {
         return m('.list-group-item', [
-          m('span', address),
-          m('span.pull-right', "Rating: " + "Coming soon")
+          m('span', search.address),
+          m('span.pull-right', "Rating: " + Math.round(search.livability))
         ])
       })]
   )]
