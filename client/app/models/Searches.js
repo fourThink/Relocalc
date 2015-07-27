@@ -20,5 +20,11 @@ var Searches = module.exports = {
     return ref.once("value", function(snapshot){
       cb(_.toArray(snapshot.val()));
     })
+  },
+
+  vm: function(){
+    return {
+      searches: m.prop([])
+    }
   }
 };

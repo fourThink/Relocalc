@@ -88,7 +88,7 @@ var Locations = module.exports = {
     return {
       address: m.prop(''),
       lat: m.prop(''),
-      lng: m.prop(''),
+      lng: m.prop('')
     }
   }
 
@@ -116,7 +116,7 @@ var modelData = function(data) {
     livibility: data.livibility,
     lat: Locations.lat(),
     lng: Locations.lng()
-  }
+  };
 
   if(isNaN(response.restAvg)) {
     toastr["error"]("No available data. Please check that the address");
