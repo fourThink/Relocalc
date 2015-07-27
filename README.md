@@ -51,23 +51,30 @@ README
 
 ## Getting Started
 
-In the terminal:
+### From the terminal:
+
+1. Install Postgres:
 
 ```
-npm install
+brew install postgres
 
-pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start    (must install postgres if not 
-installed)
+```
 
-psql relocalc_dev 
+2. Setup Database (from the Relocalc root directory):
 
-node server/db/populateDb.js   
+```
+./setupEnvironment
 
+``` 
+
+3. Start the server: 
+
+```
 gulp start
 
 ```
 
-To compile css, you must stop the server and run 
+4. To compile css, you must stop the server and run 
 
 ```
 gulp sass
