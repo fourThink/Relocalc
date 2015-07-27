@@ -1,11 +1,11 @@
 # Relocalc
 
 A resource for residents or businesses looking to move to Austin, TX. 
-Let the app calculate a grade for the area of your interest.
+Let the app calculate a livability score for the area of your interest.
 
 ## Overview
 
-Relocal is a Mithril/Express/Postgres/Browserify web application that taps into various Austin Open Data API's using data from the [City of Austin Data Portal] (http://data.austintexas.gov).
+Relocal is a Mithril/Express/Postgres/Browserify web application that taps into various Austin Open Data APIs using data from the [City of Austin Data Portal] (http://data.austintexas.gov).
 Each address will produce a livability score based on an algorithm which uses the available data.
 The end user will be able to compare the results of particular data for an address entered with Austin averages.
 In addition, the user will be able to scale the importance of each element to receive a weighted result depending on 
@@ -76,3 +76,7 @@ To compile css, you must stop the server and run:
 ```
 gulp sass
 ```
+## Other Resources
+* [Getting Started With Highcharts.js](http://www.highcharts.com/docs/getting-started/your-first-chart) - used for displaying the search results data.
+* [Knex Documentation](http://knexjs.org/) - used to migrate data when adding new tables.
+* [GeoLib] (https://github.com/manuelbieh/Geolib) - used for geospatial calculations (e.g. comparing database entries within a geographic radius.)
