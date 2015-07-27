@@ -7,14 +7,14 @@ exports.controller = function(options) {
 
   ctrl.initialize = function (element, isInit, context) {
 
-   var adjustZoom = function(){
-     if(options.location.address()){
-       return 16;
-     }
-     else {
-       return 8;
-     }
-   };
+    var adjustZoom = function(){
+      if(options.location.address()){
+        return 16;
+      }
+      else {
+        return 8;
+      }
+    };
 
 
     context.timer = setTimeout(function () {
@@ -63,7 +63,7 @@ exports.controller = function(options) {
 };
 
 exports.view = function(ctrl, options) {
-   return m('.col-sm-6 .mapContainer', {config: ctrl.initialize});
+  return m('.col-sm-6 .mapContainer', {config: ctrl.initialize});
 };
 
 function drawMap() {
@@ -72,28 +72,26 @@ function drawMap() {
 };
 
 function unloadable(element, isInit, context) {
-   context.timer = setTimeout(function() {
-       ctrl.initialize();
-   }, 0);
+  context.timer = setTimeout(function() {
+    ctrl.initialize();
+  }, 0);
 }
 
 //was testing out using a loader below instead of/with setTimeout
 /*
-function requestWithFeedback(args) {
-  //query the DOM for loaders
-  var loaders = document.querySelectorAll(".loader");
-
-  for (var i = 0, loader; loader = loaders[i]; i++) {
-    loader.style.display = "block";
-  }
-
-  return m.request(args).then(function(value){
-    for (var i = 0, loader; loader = loaders[i]; i++) {
-      loader.style.display = "none";
-    }
-    return value;
-  })
-}
-*/
+ function requestWithFeedback(args) {
+ //query the DOM for loaders
+ var loaders = document.querySelectorAll(".loader");
+ for (var i = 0, loader; loader = loaders[i]; i++) {
+ loader.style.display = "block";
+ }
+ return m.request(args).then(function(value){
+ for (var i = 0, loader; loader = loaders[i]; i++) {
+ loader.style.display = "none";
+ }
+ return value;
+ })
+ }
+ */
 
 // results[0].geometry.location.lat and results[0].geometry.location.lng
