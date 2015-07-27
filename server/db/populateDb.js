@@ -55,7 +55,7 @@ var insertCrime = function(data){
 }
 
 //this function takes a list of objects with resturant info and populates the restaurants and restaurant inepsections tables
-var popluteRestaurantTables = function (array){
+var populateRestaurantTables = function (array){
   array.map(function (info) {
     return insertRestaurant(info)
     .then(insertRestaurantInspection)
@@ -72,7 +72,7 @@ var populateCrimeTable = function(array){
   });
 }
 
-console.log('populating tables')
+//console.log('populating tables')
 
-popluteRestaurantTables(restaurantArray)
-//populateCrimeTable(crimeArray);
+populateRestaurantTables(restaurantArray)
+populateCrimeTable(crimeArray);
