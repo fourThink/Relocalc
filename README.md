@@ -59,11 +59,16 @@ Install Postgres:
 brew install postgres
 ```
 
-Setup Database (from the Relocalc root directory):
+Set up the database & compile CSS for the first time (from the Relocalc root directory):
 
 ```
 ./setupDatabase.js
 ``` 
+
+Repopulate the database tables (only needs to be done if rows are deleted from all tables):
+```
+node server/db/populateDb.js
+```
 
 Start the server: 
 
@@ -71,7 +76,7 @@ Start the server:
 gulp start
 ```
 
-To compile css, you must stop the server and run: 
+To recompile css, you must stop the server and run: 
 
 ```
 gulp sass
