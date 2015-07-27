@@ -111,12 +111,12 @@ var modelData = function(data) {
   var response = {
     crimes: data.crimes.length,
     restaurants: data.restaurants.length,
-    restAvg: data.searchInspecAvg,
-    crimeAvg: data.searchCrimesPerSqMi,
-    livibility: data.livibility,
     lat: Locations.lat(),
-    lng: Locations.lng()
-  };
+    lng: Locations.lng(),
+    restAvg: data.searchInspecAvg || 75,
+    crimeAvg: data.searchCrimesPerSqMi || 75,
+    livibility: data.livibility || 75
+  }
 
   if(isNaN(response.restAvg)) {
     toastr["error"]("No available data. Please check that the address");

@@ -13,6 +13,7 @@ exports.controller = function (options) {
     var address = options.location.address();
     return Location.postToFetchRestaurantData(address, function cb(res) {
       //set values on vm
+      console.log(res);
       options.location.lng(res.lng);
       options.location.lat(res.lat);
       //force a re-render so the graphs display with the new values

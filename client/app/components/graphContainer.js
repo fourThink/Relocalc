@@ -54,7 +54,7 @@ exports.controller = function(options) {
                 },
                 series: [{
                     name: 'Your Search',
-                    data: [Math.floor(Location.search().searchInspecAvg)]
+                    data: [Math.floor(Location.search().restAvg)]
                 }, {
                     name: 'City of Austin (average)',
                     data: [70]
