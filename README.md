@@ -62,7 +62,7 @@ brew install postgres
 Set up the database & compile CSS for the first time (from the Relocalc root directory):
 
 ```
-./setupDatabase.js
+./setupDatabase.bash
 ``` 
 
 Repopulate the database tables (only needs to be done if rows are deleted from all tables):
