@@ -43,7 +43,6 @@ var insertRestaurantInspection = function (data){
 
 //This function takes an object containing data about a crime, and inserts an table row
 //returns a promise
-
 var insertCrime = function(data){
   return Crime.create({
     id: data.report_number.trim(),
@@ -59,11 +58,9 @@ var insertCrime = function(data){
 var popluteRestaurantTables = function (array){
   array.map(function (info) {
     return insertRestaurant(info)
-    .then(function(){
-      insertRestaurantInspection(info); 
-    })
-    .catch(function (){
-      insertRestaurantInspection(info);
+    .then(insertRestaurantInspection)
+    .catch(function() {
+      insertRestaurantInspection(info)
     })
   })
 }
@@ -75,6 +72,7 @@ var populateCrimeTable = function(array){
   });
 }
 
+console.log('populating tables')
 
 popluteRestaurantTables(restaurantArray)
-populateCrimeTable(crimeArray);
+//populateCrimeTable(crimeArray);

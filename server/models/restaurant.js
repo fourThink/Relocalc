@@ -12,4 +12,6 @@ var Restaurant = module.exports = createModel('Restaurant', 'restaurants', {
   	.where('r.id', id)
   },
 
+  
+
 });
