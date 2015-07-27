@@ -80,3 +80,4 @@ gulp sass
 * [Highcharts](http://www.highcharts.com/docs/getting-started/your-first-chart) - used for displaying the search results data.
 * [Knex](http://knexjs.org/) - used to migrate data when adding new tables.
 * [GeoLib] (https://github.com/manuelbieh/Geolib) - used for geospatial calculations (e.g. comparing database entries within a geographic radius.)
+* [Firebase] () - 
