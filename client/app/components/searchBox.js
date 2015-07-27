@@ -28,7 +28,7 @@ exports.view = function (ctrl, options) {
   return m('.row', [
     m('.card-holder',[
   m('.addressInput-card',[
-      [m('h1',  "Relocalc")],
+      [m('h1',  "Search Austin addresses to find your perfect spot.")],
         [m('form[role="form", type="post"]', {onsubmit: ctrl.fetchGeoCode},
             [m('input.addressInput.address[type="text"][placeholder="Enter an Austin address (Example: 700 San Jacinto, Austin, TX 78701)"]',
               {value: options.location.address(),

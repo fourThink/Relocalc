@@ -1,4 +1,8 @@
+//This file initializes the graphs for Crime Score, Restaurant Score, and Number of Restaurants
+
 var m = require('mithril');
+
+//All data for populating the graphs comes from Location.search()
 var Location = require('../models/Location');
 
 exports.controller = function(options) {
@@ -32,12 +36,16 @@ exports.controller = function(options) {
                     name: 'City of Austin (average)',
                     data: [Math.floor(Location.search().cityCrimeAvg)]
                 }],
+                //Info that appears when you hover over a column
                 tooltip: {
                     useHTML: true,
                     headerFormat: '<small>{point.key}</small><table>',
                     pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
                         '<td style="text-align: right"><b>{point.y}</b></td></tr>',
                     footerFormat: '</table>',
+                },
+                credits: {
+                    enabled: false
                 }
             });
         });
@@ -78,6 +86,9 @@ exports.controller = function(options) {
                     pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
                         '<td style="text-align: right"><b>{point.y}</b></td></tr>',
                     footerFormat: '</table>',
+                },
+                credits: {
+                    enabled: false
                 }
             });
         });
@@ -118,6 +129,9 @@ exports.controller = function(options) {
                     pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
                         '<td style="text-align: right"><b>{point.y}</b></td></tr>',
                     footerFormat: '</table>',
+                },
+                credits: {
+                    enabled: false
                 }
             });
         });

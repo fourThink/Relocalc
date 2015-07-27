@@ -1,0 +1,91 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
+
+// COLOR VARIABLES
+$background_color: #2A373C; //card
+$submit_btn: #192C33;
+$submit_btn_hover: #2A373C;
+$border_radius: 20px;
+$font_weight: 200;
+
+/* BEGIN general styling */
+
+body {
+  background-color:#435359;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'Roboto', sans-serif;
+}
+
+div, input, form, .navbar, .form-control, .btn, .panel {
+  border-radius: $border_radius;
+  font-weight: $font_weight;
+}
+
+input {
+  text-align: center;
+  border: 0px;
+}
+
+input[type="range"] {
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+.resultsHeadline {
+  text-align: center;
+  font-size: 36px;
+  color: white;
+  font-weight: $font_weight;
+}
+
+h1 {
+  color: white;
+  font-weight: $font_weight;
+}
+
+h3, h4 {
+  text-align: center;
+  color: white;
+  font-weight: $font_weight;
+}
+
+.slider {
+  text-align: center;
+  width: 75%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.panel-heading {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.list-group-item:first-child, .list-group-item:last-child {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.headline {
+  color: white;
+  font-size: 100px;
+  text-align: center;
+  font-weight: $font_weight;
+  margin-top: -20px;
+}
+
+.row {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.col-sm-4 {
+  border-radius: 10px;
+}
+
+/* END general styling */

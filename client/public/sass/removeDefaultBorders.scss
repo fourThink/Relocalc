@@ -1,0 +1,22 @@
+/* BEGIN this section removes default blue borders when buttons and form inputs are selected */
+
+.form-control:focus{
+    border-color: #cccccc;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.btn:focus,.btn:active {
+   outline: none !important;
+}
+
+.search-form input[type="search"] {  
+      -webkit-box-shadow: none;
+      outline: -webkit-focus-ring-color auto 0px;
+}
+
+textarea:focus, input:focus{
+    outline: 0;
+}
+
+/* END this section removes default blue borders when buttons and form inputs are selected */
