@@ -62,7 +62,7 @@ brew install postgres
 Setup Database (from the Relocalc root directory):
 
 ```
-./setupDatabase
+./setupDatabase.js
 ``` 
 
 Start the server: 
