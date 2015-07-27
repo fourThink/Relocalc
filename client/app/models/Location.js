@@ -53,8 +53,8 @@ var Locations = module.exports = {
         "lng": res.results[0].geometry.location.lng,
         "radius": 1,
         "weights": {
-          "restaurants": Locations.crimeWeight() || 50,
-          "crimes": Locations.restWeight() || 50
+          "crimes": Locations.crimeWeight() || 50,
+          "restaurants": Locations.restWeight() || 50
         }
       };
       console.log(locationData);
