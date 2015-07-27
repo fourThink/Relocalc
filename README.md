@@ -53,25 +53,25 @@ README
 
 ### From the terminal:
 
-1. Install Postgres:
+Install Postgres:
 
 ```
 brew install postgres
 ```
 
-2. Setup Database (from the Relocalc root directory):
+Setup Database (from the Relocalc root directory):
 
 ```
 ./setupDatabase
 ``` 
 
-3. Start the server: 
+Start the server: 
 
 ```
 gulp start
 ```
 
-4. To compile css, you must stop the server and run 
+To compile css, you must stop the server and run 
 
 ```
 gulp sass
