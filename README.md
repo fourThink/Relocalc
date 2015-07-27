@@ -71,7 +71,7 @@ Start the server:
 gulp start
 ```
 
-To compile css, you must stop the server and run 
+To compile css, you must stop the server and run: 
 
 ```
 gulp sass
