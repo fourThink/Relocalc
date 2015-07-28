@@ -1,6 +1,8 @@
 #!/bin/bash
 echo running npm install
 npm install
+echo install knex globally
+npm install -g knex
 echo Starting postgres server
 postgres -D /usr/local/var/postgres
 echo creating relocalc_dev database...
