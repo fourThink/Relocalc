@@ -78,8 +78,6 @@ var reduceRestaurants = function (restaurants, circle){
   })
 };
 
-
-
 //export function described at first line of file
 module.exports =  function(table, coords){
   var handle = handler(table);
