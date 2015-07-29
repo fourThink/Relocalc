@@ -59,7 +59,7 @@ var Locations = module.exports = {
         "weights": {
           "crimes": Locations.crimeWeight() || 50,
           "restaurants": Locations.restWeight() || 50,
-          "commute" : Locations.commuteWeight() || 50
+          // "commute" : Locations.commuteWeight() || 50
         }
       };
       return m.request({method: "POST", url: "", 'Content-Type': 'application/json', data: locationData})
