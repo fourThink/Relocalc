@@ -78,58 +78,70 @@ app.post('/', function (req, res){
     httpResponseBody.searchInspecAvg = sum / count;
     return httpResponseBody;
   })
-  //Make Zillow API call to get address value and neighborhood demographic info
+  // Make Zillow API call to get address value and neighborhood demographic info
+  // Then send httpResponseBody back to client
   .then(function (httpResponseBody) {
     requestPromise(addressOptions)
+    // Get the basic info for the requested address
     .then(function(res){
       if(res.search(/Error/g)>0) {
-        console.log('No exact match found by Zillow:',res.search(/Error/g))
-      }
+        console.log('No exact match found by Zillow')
+      } else {
       //Parse the XML response from Zillow into a JS object
-      // NOTE: If the address does not have an exact match in Zillow, everything will break because parseString breaks.
-      parser.parseString(res, function(err, result) {
-        //Unwrap the response the extract the desired data
-        if (err) {
-          console.log('Parse error')
-          return neighborhoodOptions
-        }
-        houseData.summary = result['SearchResults:searchresults']['response'][0]['results'][0]['result']
-      })
-      houseData.value = houseData.summary[0]['zestimate'][0]['amount'][0]['_']-0 // Using '-0' to implicitly convert the string value to a number
-      houseData.neighborhood = {}
-      houseData.neighborhood.rid = houseData.summary[0]['localRealEstate'][0]['region'][0]['$']['id']
-      houseData.neighborhood.name = houseData.summary[0]['localRealEstate'][0]['region'][0]['$']['name']
-      neighborhoodOptions.uri = 'http://www.zillow.com/webservice/GetDemographics.htm?zws-id=X1-ZWz1a5itpkflzf_540hi&rid='+houseData.neighborhood.rid+'&state=TX&city=Austin&neighborhood='+houseData.neighborhood.name.split(' ').join('+');
+      // NOTE: If the address does not have an exact match in Zillow, the server will bypass the Zillow Data.
+        parser.parseString(res, function(err, result) {
+          //Unwrap the response the extract the desired data
+          if (err) {
+            console.log('Parse error')
+          } else {
+            houseData.summary = result['SearchResults:searchresults']['response'][0]['results'][0]['result']
+            houseData.value = houseData.summary[0]['zestimate'][0]['amount'][0]['_']-0 // Using '-0' to implicitly convert the string value to a number
+            houseData.neighborhood = {}
+            houseData.neighborhood.rid = houseData.summary[0]['localRealEstate'][0]['region'][0]['$']['id']
+            houseData.neighborhood.name = houseData.summary[0]['localRealEstate'][0]['region'][0]['$']['name']
+            neighborhoodOptions.uri = 'http://www.zillow.com/webservice/GetDemographics.htm?zws-id=X1-ZWz1a5itpkflzf_540hi&rid='+houseData.neighborhood.rid+'&state=TX&city=Austin&neighborhood='+houseData.neighborhood.name.split(' ').join('+');
+          }
+        })
+      }
       return neighborhoodOptions 
     })
+    // Get the neighborhood information for the requested address
     .then(function(result){
-      //Get the neighborhood information for the requested address
-      return requestPromise(result)
+      if (result.uri===''){
+        return 'Zillow Error'
+      } else {
+        return requestPromise(result)
+      }
     })
+    // Extract the neighborhood data and insert into httpResponseBody
     .then(function(res){
-      parser.parseString(res, function(err, result){
-        //Property Taxes for neighborhood and Austin average
-        houseData.neighborhood.propTaxNeighborhood = result['Demographics:demographics']['response'][0]['pages'][0]['page'][0]['tables'][0]['table'][0]['data'][0]['attribute'][13]['values'][0]['neighborhood'][0]['value'][0]['_']-0 // Using '-0' to implicitly convert the string value to a number
-        houseData.neighborhood.propTaxCity = result['Demographics:demographics']['response'][0]['pages'][0]['page'][0]['tables'][0]['table'][0]['data'][0]['attribute'][13]['values'][0]['city'][0]['value'][0]['_']-0
-      
-        //Median House Size for neighborhood and Austin average
-        houseData.neighborhood.houseSizeNeighborhood = result['Demographics:demographics']['response'][0]['pages'][0]['page'][1]['tables'][0]['table'][0]['data'][0]['attribute'][2]['values'][0]['neighborhood'][0]['value'][0]-0 // Using '-0' to implicitly convert the string value to a number
-        houseData.neighborhood.houseSizeCity = result['Demographics:demographics']['response'][0]['pages'][0]['page'][1]['tables'][0]['table'][0]['data'][0]['attribute'][2]['values'][0]['city'][0]['value'][0]-0 
+      if (res !== 'Zillow Error'){
+        parser.parseString(res, function(err, result){
+          //Property Taxes for neighborhood and Austin average
+          houseData.neighborhood.propTaxNeighborhood = result['Demographics:demographics']['response'][0]['pages'][0]['page'][0]['tables'][0]['table'][0]['data'][0]['attribute'][13]['values'][0]['neighborhood'][0]['value'][0]['_']-0 // Using '-0' to implicitly convert the string value to a number
+          houseData.neighborhood.propTaxCity = result['Demographics:demographics']['response'][0]['pages'][0]['page'][0]['tables'][0]['table'][0]['data'][0]['attribute'][13]['values'][0]['city'][0]['value'][0]['_']-0
         
-        //Median Household Income for neighborhood and Austin average
-        houseData.neighborhood.medianIncomeNeighborhood = Math.floor(result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][0]['values'][0]['neighborhood'][0]['value'][0]['_'])
-        houseData.neighborhood.medianIncomeCity = Math.floor(result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][0]['values'][0]['city'][0]['value'][0]['_'])
-        
-        //Median Age for neighborhood and Austin average
-        houseData.neighborhood.medianAgeNeighborhood = result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][3]['values'][0]['neighborhood'][0]['value'][0]-0 // Using '-0' to implicitly convert the string value to a number
-        houseData.neighborhood.medianAgeCity = result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][3]['values'][0]['city'][0]['value'][0]-0
+          //Median House Size for neighborhood and Austin average
+          houseData.neighborhood.houseSizeNeighborhood = result['Demographics:demographics']['response'][0]['pages'][0]['page'][1]['tables'][0]['table'][0]['data'][0]['attribute'][2]['values'][0]['neighborhood'][0]['value'][0]-0 // Using '-0' to implicitly convert the string value to a number
+          houseData.neighborhood.houseSizeCity = result['Demographics:demographics']['response'][0]['pages'][0]['page'][1]['tables'][0]['table'][0]['data'][0]['attribute'][2]['values'][0]['city'][0]['value'][0]-0 
+          
+          //Median Household Income for neighborhood and Austin average
+          houseData.neighborhood.medianIncomeNeighborhood = Math.floor(result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][0]['values'][0]['neighborhood'][0]['value'][0]['_'])
+          houseData.neighborhood.medianIncomeCity = Math.floor(result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][0]['values'][0]['city'][0]['value'][0]['_'])
+          
+          //Median Age for neighborhood and Austin average
+          houseData.neighborhood.medianAgeNeighborhood = result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][3]['values'][0]['neighborhood'][0]['value'][0]-0 // Using '-0' to implicitly convert the string value to a number
+          houseData.neighborhood.medianAgeCity = result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][3]['values'][0]['city'][0]['value'][0]-0
 
-        //% of households with kids for neighborhood and Austin average
-        houseData.neighborhood.percentWithKidsNeighborhood = (result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][4]['values'][0]['neighborhood'][0]['value'][0]['_']*100).toFixed(3)-0 //Convert decimal to percentage with 3 decimal places
-        houseData.neighborhood.percentWithKidsCity = (result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][4]['values'][0]['city'][0]['value'][0]['_']*100).toFixed(3)-0 
-        // Attach Zillow data to response
-        httpResponseBody.zillowData = houseData
-      })
+          //% of households with kids for neighborhood and Austin average
+          houseData.neighborhood.percentWithKidsNeighborhood = (result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][4]['values'][0]['neighborhood'][0]['value'][0]['_']*100).toFixed(3)-0 //Convert decimal to percentage with 3 decimal places
+          houseData.neighborhood.percentWithKidsCity = (result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][4]['values'][0]['city'][0]['value'][0]['_']*100).toFixed(3)-0 
+          // Attach Zillow data to response
+          httpResponseBody.zillowData = houseData
+        })
+      } else {
+        httpResponseBody.zillowData = {}
+      }
       return httpResponseBody
     })
     // Send response back to client
