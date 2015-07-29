@@ -135,6 +135,49 @@ exports.controller = function(options) {
         });
   };
 
+      ctrl.initCommuteTime = function (element, isInit, context) {
+    
+        //Initialize restaurant safety chart
+        $(function () { 
+            $('.commuteTime').highcharts({
+                colors: ['#7A878B', '#434348'],
+                chart: {
+                    type: 'column',
+                    spacing: 50
+                },
+                title: {
+                    text: 'Commute Time'
+                },
+                xAxis: {
+                    categories: ['']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Average Commute Time (2015)'
+                    }
+                },
+                series: [{
+                    name: 'Your Search',
+                    data: [Location.commuteTime()]
+                }, {
+                    name: 'City of Austin (average)',
+                    data: [24.6]
+                }],
+                 tooltip: {
+                    useHTML: true,
+                    headerFormat: '<small>{point.key}</small><table>',
+                    pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
+                        '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+                    footerFormat: '</table>',
+                },
+                credits: {
+                    enabled: false
+                }
+            });
+        });
+  };
+
+
   ctrl.initCostCompare = function (element, isInit, context) {
     
         //Initialize number of restaurants chart
