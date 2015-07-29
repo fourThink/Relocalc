@@ -38,6 +38,7 @@ var Locations = module.exports = {
   lng: m.prop(''),
   crimeWeight: m.prop(''),
   restWeight: m.prop(''),
+  costWeight: m.prop(''),
   address: m.prop(''),
 
   postToFetchRestaurantData: function(address, cb) {
@@ -65,6 +66,7 @@ var Locations = module.exports = {
           var data = modelData(res);
           if (data !== null) {
             Locations.search(data);
+            console.log('Locations.search()', Locations.search())
           }
             Locations.saveSearch(Locations.address(), res.livibility);
             return cb(data);
@@ -131,7 +133,8 @@ var modelData = function(data) {
     crimeAvg: data.searchCrimesPerSqMi,
     livability: data.livibility,
     cityRestAvg: data.meanRestInspecAvg,
-    cityCrimeAvg: data.meanCrimesPerSqMi
+    cityCrimeAvg: data.meanCrimesPerSqMi,
+    zillow: data.zillowData
   };
 
   if(isNaN(response.restAvg)) {
