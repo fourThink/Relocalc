@@ -34,8 +34,11 @@ app.get('/', function (req, res){
 //Init objects for use in Zillow API calls.
 var houseData = {};
 var neighborhoodURL = '';
-var addressOptions = {
-  uri: 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id='+credentials+'&address=1803+E+18th+St&citystatezip=Austin+TX',
+var addressOptionsTemplate = {
+  uri: 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id='+credentials+'&address=*&citystatezip=Austin+TX',
+  method: 'GET'
+};var addressOptions = {
+  uri: 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id='+credentials+'&address=*&citystatezip=Austin+TX',
   method: 'GET'
 };
 var neighborhoodOptions = {
@@ -45,6 +48,10 @@ var neighborhoodOptions = {
 
 
 app.post('/', function (req, res){
+  // Get the street address, remove commas, and replace whitespace with '+' for use in Zillow API
+  var zillowAddress = req.body.address.split(' Austin')[0].replace(/\s/g, '+').replace(/\,/,'');
+  addressOptions.uri = addressOptionsTemplate.uri.replace(/\*/,zillowAddress);
+
   function milestoMeters(miles){
     return miles / 0.00062137;
   }
@@ -73,13 +80,19 @@ app.post('/', function (req, res){
   })
   //Make Zillow API call to get address value and neighborhood demographic info
   .then(function (httpResponseBody) {
-    console.log('Starting Zillow calls');
     requestPromise(addressOptions)
     .then(function(res){
-      console.log('First Zillow call results:', res)
+      if(res.search(/Error/g)>0) {
+        console.log('No exact match found by Zillow:',res.search(/Error/g))
+      }
       //Parse the XML response from Zillow into a JS object
+      // NOTE: If the address does not have an exact match in Zillow, everything will break because parseString breaks.
       parser.parseString(res, function(err, result) {
         //Unwrap the response the extract the desired data
+        if (err) {
+          console.log('Parse error')
+          return neighborhoodOptions
+        }
         houseData.summary = result['SearchResults:searchresults']['response'][0]['results'][0]['result']
       })
       houseData.value = houseData.summary[0]['zestimate'][0]['amount'][0]['_']-0 // Using '-0' to implicitly convert the string value to a number
@@ -124,6 +137,7 @@ app.post('/', function (req, res){
       var weights = req.body.weights || {restaurants: 50, crimes: 50};
       calculateLivability(weights, httpResponseBody, req.body.radius);
       res.json(httpResponseBody);
+      console.log(httpResponseBody.zillowData)
     });
   })
 });
