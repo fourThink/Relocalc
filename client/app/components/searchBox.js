@@ -15,7 +15,7 @@ exports.controller = function (options) {
   ctrl.fetchGeoCode = function() {
     var address = options.location.address();
     var workAddress = options.location.workAddress();
-    return Location.postToFetchRestaurantData(address, function cb(res) {
+    return Location.postToFetchRestaurantData(address, workAddress, function cb(res) {
       //set values on vm
       options.location.lng(res.lng);
       options.location.lat(res.lat);
@@ -23,9 +23,6 @@ exports.controller = function (options) {
       if (res !== null) {
         m.redraw();
         toastr["success"]("Data successfully loaded for " + address);
-        Location.postToGoogleDistanceAPI(address, workAddress, function(res){
-          console.log(res.rows[0].elements[0])
-        })
       }
     });
   };
@@ -61,6 +58,14 @@ exports.view = function (ctrl, options) {
                     [m('.slider',
                       [m('input[type="range"]'
                         ,{min: 0, max: 100, step: 1, value: Location.restWeight(), onchange: m.withAttr('value', Location.restWeight)}
+                      )]
+                    )]
+                )],
+                [m('.col-sm-6',
+                  [m('h4', 'Commute Time: ' + Location.commuteWeight())],
+                    [m('.slider',
+                      [m('input[type="range"]'
+                        ,{min: 0, max: 100, step: 1, value: Location.commuteWeight(), onchange: m.withAttr('value', Location.commuteWeight)}
                       )]
                     )]
                 )],

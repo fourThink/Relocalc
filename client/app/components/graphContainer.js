@@ -177,15 +177,19 @@ exports.controller = function(options) {
             });
         });
   };
-
 };
 
 exports.view = function(ctrl, options) {
  return  m('div', 
     [m('.col-sm-4 .crimeGraph', {config: ctrl.initCrime}),
      m('.col-sm-4 .restaurantSafety', {config: ctrl.initRestSafety}),
+<<<<<<< HEAD
      m('.col-sm-4 .restaurantNumber', {config: ctrl.initRestNumber}),
      m('.col-sm-4 .costCompare', {config: ctrl.initCostCompare})
+=======
+     m('.col-sm-4 .restaurantSafety', {config: ctrl.initRestSafety}),
+     m('.col-sm-4 .commuteTime', {config: ctrl.initCommuteTime})
+>>>>>>> Calculating Distance Livability
     ]);
 };
 
