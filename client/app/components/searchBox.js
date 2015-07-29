@@ -8,9 +8,13 @@ exports.controller = function (options) {
    * this function in Location.js model; makes a post request to GoogleAPI for coordinates for the address, which are
    * then used for a post request to our database for the data for radius around location
    */
+  ctrl.fetchData = function() {
+    ctrl.fetchGeoCode()
+  }
 
   ctrl.fetchGeoCode = function() {
     var address = options.location.address();
+    var workAddress = options.location.workAddress();
     return Location.postToFetchRestaurantData(address, function cb(res) {
       //set values on vm
       options.location.lng(res.lng);
@@ -19,6 +23,9 @@ exports.controller = function (options) {
       if (res !== null) {
         m.redraw();
         toastr["success"]("Data successfully loaded for " + address);
+        Location.postToGoogleDistanceAPI(address, workAddress, function(res){
+          console.log(res)
+        })
       }
     });
   };

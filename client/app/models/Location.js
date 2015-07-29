@@ -75,6 +75,17 @@ var Locations = module.exports = {
     });
   },
 
+  postToGoogleDistanceAPI: function(address, workAddress, callback) {
+    return m.request({method: "POST", url: '/distance', data: {
+      address:addressFormatter(address),
+      workAddress:addressFormatter(workAddress)
+    }})
+    .then(function(res){
+      console.log(res);
+      callback(res);
+    });
+  },
+
   saveSearch: function(address, livabilityScore){
     var user = Auth.isAuthenticated();
     if(user) {
