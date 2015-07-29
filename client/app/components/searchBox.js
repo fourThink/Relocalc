@@ -23,7 +23,7 @@ exports.controller = function (options) {
       if (res !== null) {
         m.redraw();
         toastr["success"]("Data successfully loaded for " + address);
-      }
+      };
     });
   };
 };

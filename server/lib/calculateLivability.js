@@ -31,10 +31,12 @@ var linEqHandler = function(data, tag){
         pnt2: {x: data.meanCrimesPerSqMi - 30, y: data.meanCrimesPerSqMi + 12},
         input: data.searchCrimesPerSqMi
       };;
-    case 'commute':
-      return {
-        
-      }
+    // case 'commute':
+    //   return {
+    //    pnt1: {x: ,y:80} 
+    //    pnt2: {x:,y:100} 
+    //    input: data.
+    //   }
   }
 }
 

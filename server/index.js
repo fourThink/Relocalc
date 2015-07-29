@@ -79,15 +79,15 @@ app.post('/', function (req, res){
     httpResponseBody.searchInspecAvg = sum / count;
     return httpResponseBody;
   })
-  // .then(function (httpResponseBody) {
-  //   request('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + 
-  //    req.body.address+'&destinations='+req.body.workAddress+'&arrival_time=1438610400&key='+ 
-  //    APIKeys.GoogleDistance, function(error, response, body) {
-  //     if (error) throw error;
-  //     httpResponseBody.distance = body;
-  //     return httpResponseBody
-  //   })
-  // })
+  .then(function (httpResponseBody) {
+    request('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + 
+     req.body.address+'&destinations='+req.body.workAddress+'&arrival_time=1438610400&key='+ 
+     APIKeys.GoogleDistance, function(error, response, body) {
+      if (error) throw error;
+      httpResponseBody.distance = body;
+      return httpResponseBody
+    })
+  })
   .then(function (httpResponseBody){
     var weights = req.body.weights || {restaurants: 50, crimes: 50};
     calculateLivability(weights, httpResponseBody, req.body.radius);
