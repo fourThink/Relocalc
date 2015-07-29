@@ -40,12 +40,13 @@ var Locations = module.exports = {
   restWeight: m.prop(''),
   costWeight: m.prop(''),
   address: m.prop(''),
+  zillowIncomeNeighborhood: m.prop(0),
+  zillowIncomeCity: m.prop(0),
 
   postToFetchRestaurantData: function(address, cb) {
     Locations.address(address);
     var cb = cb;
     this.postToFetchGeoCode(address, function (res) {
-      console.log("google", res);
       Locations.lat(res.results[0].geometry.location.lat);
       Locations.lng(res.results[0].geometry.location.lng);
       var locationData = {
@@ -58,15 +59,15 @@ var Locations = module.exports = {
           "restaurants": Locations.restWeight() || 50
         }
       };
-      console.log(locationData);
       return m.request({method: "POST", url: "", 'Content-Type': 'application/json', data: locationData})
         .then(function(res) {
-          console.log(res);
-          console.log(Object.keys(res));
           var data = modelData(res);
           if (data !== null) {
             Locations.search(data);
-            console.log('Locations.search()', Locations.search())
+            Locations.zillowIncomeNeighborhood(data.zillow.neighborhood.medianIncomeNeighborhood);
+            Locations.zillowIncomeCity(data.zillow.neighborhood.medianIncomeCity);
+            console.log('neighborhood', Locations.zillowIncomeNeighborhood())
+            console.log('city', Locations.zillowIncomeCity())
           }
             Locations.saveSearch(Locations.address(), res.livibility);
             return cb(data);
@@ -136,6 +137,7 @@ var modelData = function(data) {
     cityCrimeAvg: data.meanCrimesPerSqMi,
     zillow: data.zillowData
   };
+  console.log('response:', response)
 
   if(isNaN(response.restAvg)) {
     toastr["error"]("No available data. Please check that the address");
