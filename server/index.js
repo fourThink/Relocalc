@@ -33,7 +33,7 @@ app.post('/distance', function(req, res){
   req.body.address+'&destinations='+req.body.workAddress+'&key='+ 
   APIKeys.GoogleDistance, function(error, response, body) {
     if (error) throw error;
-    res.send(body.rows[0].elements[0])
+    res.send(body)
   })
 })
 //Init objects for use in Zillow API calls.

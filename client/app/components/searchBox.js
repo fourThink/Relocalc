@@ -24,7 +24,7 @@ exports.controller = function (options) {
         m.redraw();
         toastr["success"]("Data successfully loaded for " + address);
         Location.postToGoogleDistanceAPI(address, workAddress, function(res){
-          console.log(res)
+          console.log(res.rows[0].elements[0])
         })
       }
     });

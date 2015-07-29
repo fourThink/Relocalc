@@ -81,7 +81,6 @@ var Locations = module.exports = {
       workAddress:addressFormatter(workAddress)
     }})
     .then(function(res){
-      console.log(res);
       callback(res);
     });
   },
