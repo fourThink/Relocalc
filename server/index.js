@@ -98,7 +98,6 @@ app.post('/', function (req, res){
     // Make Zillow API call to get address value and neighborhood demographic info
     // Then send httpResponseBody back to client
     .then(function (httpResponseBody) {
-      console.log('begin zillow calls:', httpResponseBody)
       requestPromise(addressOptions)
       // Get the basic info for the requested address
       .then(function(res){
