@@ -7,7 +7,6 @@ var logDebug = function(string){
 //takes an object that has user slider weights, and returns an object with same information.
 //The purpose is to make sure the weights add up to 100, but maintains ratios to one another.
 var scaleWeights = function(weights){
-  console.log(weights)
   var sum = _.reduce(weights, function (tot, weight){
     return tot += +weight;
   }, 0)
@@ -22,15 +21,15 @@ var linEqHandler = function(data, tag){
     case 'restaurants':
       return {
         pnt1: {x: data.meanRestInspecAvg, y: 80},
-        pnt2: {x: data.meanRestInspecAvg + 5, y: 100},
+        pnt2: {x: data.meanRestInspecAvg + 5, y: 100}, // For every change of 5 in a health inspection score, the restaurant livability portion changes by 20
         input: data.searchInspecAvg
       };
     case 'crimes':
       return {
         pnt1: {x: data.meanCrimesPerSqMi, y: data.meanCrimesPerSqMi},
-        pnt2: {x: data.meanCrimesPerSqMi - 30, y: data.meanCrimesPerSqMi + 12},
+        pnt2: {x: data.meanCrimesPerSqMi - 30, y: data.meanCrimesPerSqMi + 12}, // For every change of 30 in crimes/sq mi, the crimes livability portion changes by 12
         input: data.searchCrimesPerSqMi
-      };;
+      };
     case 'commute':
       //Average and lowest average commute based on zipatlas.com
       var commute = JSON.parse(data.distance)
@@ -47,6 +46,12 @@ var linEqHandler = function(data, tag){
        pnt2: {x: 16.1, y:100},
        input: input
       }
+    case 'affordability':
+      return {
+        pnt1: {x: data.zillowData.neighborhood.medianIncomeCity/1000, y: 75},
+        pnt2: {x: (data.zillowData.neighborhood.medianIncomeCity*0.5)/1000, y: 100}, // For every change of 10% in income vs city average, the affordability livability portion changes by 2.5
+        input: data.zillowData.neighborhood.medianIncomeNeighborhood/1000
+    };
   }
 }
 

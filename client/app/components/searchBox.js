@@ -60,12 +60,20 @@ exports.view = function (ctrl, options) {
                         ,{min: 0, max: 100, step: 1, value: Location.restWeight(), onchange: m.withAttr('value', Location.restWeight)}
                       )]
                     )]
-                )],
+                )],              
                 [m('.col-sm-6',
                   [m('h4', 'Commute Time: ' + Location.commuteWeight())],
                     [m('.slider',
                       [m('input[type="range"]'
                         ,{min: 0, max: 100, step: 1, value: Location.commuteWeight(), onchange: m.withAttr('value', Location.commuteWeight)}
+                      )]
+                    )]
+                )],
+                [m('.col-sm-6',
+                  [m('h4', 'Affordability: ' + Location.costWeight())],
+                    [m('.slider',
+                      [m('input[type="range"]'
+                        ,{min: 0, max: 100, step: 1, value: Location.costWeight(), onchange: m.withAttr('value', Location.costWeight)}
                       )]
                     )]
                 )],

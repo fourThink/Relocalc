@@ -57,7 +57,8 @@ var Locations = module.exports = {
         "weights": {
           "crimes": Locations.crimeWeight() || 50,
           "restaurants": Locations.restWeight() || 50,
-          "commute" : workAddress !== '' ? Locations.commuteWeight() || 50 : 0
+          "commute" : workAddress !== '' ? Locations.commuteWeight() || 50 : 0,
+          "affordability": Locations.costWeight() || 50,
         }
       };
       return m.request({method: "POST", url: "", 'Content-Type': 'application/json', data: locationData})
@@ -65,6 +66,8 @@ var Locations = module.exports = {
           var data = modelData(res);
           if (data !== null) {
             Locations.search(data);
+            Locations.zillowIncomeNeighborhood(data.zillow.neighborhood.medianIncomeNeighborhood);
+            Locations.zillowIncomeCity(data.zillow.neighborhood.medianIncomeCity);
           }
             Locations.saveSearch(Locations.address(), res.livibility);
             return callback(data);
