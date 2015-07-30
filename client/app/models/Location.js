@@ -57,7 +57,7 @@ var Locations = module.exports = {
         "weights": {
           "crimes": Locations.crimeWeight() || 50,
           "restaurants": Locations.restWeight() || 50,
-          "commute" : Locations.commuteWeight() || 50
+          "commute" : workAddress !== '' ? Locations.commuteWeight() || 50 : 0
         }
       };
       return m.request({method: "POST", url: "", 'Content-Type': 'application/json', data: locationData})
@@ -112,8 +112,10 @@ var modelData = function(data) {
   //Separate data into variables
   var inspectCount = 0;   
 
-  Locations.commuteTime(Math.round(JSON.parse(data.distance).rows[0].elements[0].duration.value/60))
-  console.log(Locations.commuteTime())
+  var commuteData = JSON.parse(data.distance)
+  if (commuteData.status === 'OK'){
+    Locations.commuteTime(Math.round(JSON.parse(data.distance).rows[0].elements[0].duration.value/60))
+  }
 
   var sum = data.restaurants.reduce(function(tot, rest){
     if(rest.avg) {
