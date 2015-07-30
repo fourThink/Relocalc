@@ -65,7 +65,7 @@ app.post('/', function (req, res){
     httpResponseBody.searchInspecAvg = sum / count;
     return httpResponseBody;
   })
-  .then(function (httpResponseBody) {
+  .then(function attachCommuteTime(httpResponseBody) {
     request('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + 
      req.body.address+'&destinations='+req.body.workAddress+'&arrival_time=1438610400&key='+ 
      APIKeys.GoogleDistance, function(error, response, body) {

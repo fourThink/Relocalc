@@ -32,11 +32,20 @@ var linEqHandler = function(data, tag){
         input: data.searchCrimesPerSqMi
       };;
     case 'commute':
-      var commute = JSON.parse(data.distance).rows[0].elements[0].duration.value/60
+      //Average and lowest average commute based on zipatlas.com
+      var commute = JSON.parse(data.distance)
+      if (commute.status === "INVALID_REQUEST") {
+        return {
+           pnt1: {x: 24.6, y: 80}, 
+           pnt2: {x: 16.1, y:100},
+           input: 24.6
+        }
+     }
+      var input = commute.rows[0].elements[0].duration.value/60
       return {
-       pnt1: {x: 24.6, y: 50}, 
-       pnt2: {x: 12.3, y:100},
-       input: commute
+       pnt1: {x: 24.6, y: 80}, 
+       pnt2: {x: 16.1, y:100},
+       input: input
       }
   }
 }
