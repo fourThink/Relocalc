@@ -42,8 +42,6 @@ var Locations = module.exports = {
   costWeight: m.prop(''),
   address: m.prop(''),
   commuteTime: m.prop(''),
-  zillowIncomeNeighborhood: m.prop(0),
-  zillowIncomeCity: m.prop(0),
 
   postToFetchRestaurantData: function(address, workAddress, callback) {
     Locations.address(address);
@@ -53,6 +51,7 @@ var Locations = module.exports = {
       Locations.lng(res.results[0].geometry.location.lng);
       var locationData = {
         "address": address,
+        "workAddress" : workAddress,
         "lat": res.results[0].geometry.location.lat,
         "lng": res.results[0].geometry.location.lng,
         "radius": 1,
@@ -67,26 +66,12 @@ var Locations = module.exports = {
           var data = modelData(res);
           if (data !== null) {
             Locations.search(data);
-            Locations.zillowIncomeNeighborhood(data.zillow.neighborhood.medianIncomeNeighborhood);
-            Locations.zillowIncomeCity(data.zillow.neighborhood.medianIncomeCity);
-            console.log('neighborhood', Locations.zillowIncomeNeighborhood())
-            console.log('city', Locations.zillowIncomeCity())
           }
             Locations.saveSearch(Locations.address(), res.livibility);
             return callback(data);
         })
     });
   },
-
-  // postToGoogleDistanceAPI: function(address, workAddress, callback) {
-  //   return m.request({method: "POST", url: '/distance', data: {
-  //     address:addressFormatter(address),
-  //     workAddress:addressFormatter(workAddress)
-  //   }})
-  //   .then(function(res){
-  //     Locations.commuteTime(Math.round(res.rows[0].elements[0].duration.value/60))
-  //   });
-  // },
 
   saveSearch: function(address, livabilityScore){
     var user = Auth.isAuthenticated();
@@ -128,6 +113,9 @@ var modelData = function(data) {
   //Separate data into variables
   var inspectCount = 0;   
 
+  Locations.commuteTime(Math.round(JSON.parse(data.distance).rows[0].elements[0].duration.value/60))
+  console.log(Locations.commuteTime())
+
   var sum = data.restaurants.reduce(function(tot, rest){
     if(rest.avg) {
       tot += rest.avg;
@@ -148,7 +136,6 @@ var modelData = function(data) {
     livability: data.livibility,
     cityRestAvg: data.meanRestInspecAvg,
     cityCrimeAvg: data.meanCrimesPerSqMi,
-    zillow: data.zillowData
   };
   console.log('response:', response)
 

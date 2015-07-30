@@ -7,7 +7,8 @@ var app = express();
 var Restaurant = require('./models/restaurant.js');
 var httpResponseBody = require('./lib/httpResponseBody.js');
 var calculateLivability = require('./lib/calculateLivability.js');
-
+var request = require('request-promise')
+var APIKeys = require('./apikeys.js')
 
 var shared = ['mithril'];
 app.get('/js/vendor-bundle.js', browserify(shared));
@@ -36,21 +37,6 @@ app.post('/distance', function(req, res){
     res.send(body)
   })
 })
-//Init objects for use in Zillow API calls.
-var houseData = {};
-var neighborhoodURL = '';
-var addressOptionsTemplate = {
-  uri: 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id='+credentials+'&address=*&citystatezip=Austin+TX',
-  method: 'GET'
-};var addressOptions = {
-  uri: 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id='+credentials+'&address=*&citystatezip=Austin+TX',
-  method: 'GET'
-};
-var neighborhoodOptions = {
-  uri: '', 
-  method: 'GET'
-};
-
 
 app.post('/', function (req, res){
   function milestoMeters(miles){
@@ -85,17 +71,14 @@ app.post('/', function (req, res){
      APIKeys.GoogleDistance, function(error, response, body) {
       if (error) throw error;
       httpResponseBody.distance = body;
-      return httpResponseBody
-    })
+    }).then(function(){return httpResponseBody
   })
   .then(function (httpResponseBody){
     var weights = req.body.weights || {restaurants: 50, crimes: 50};
     calculateLivability(weights, httpResponseBody, req.body.radius);
-    console.log(Object.keys(httpResponseBody));
-    //console.log(weights)
     res.json(httpResponseBody);
   });
-});
+})});
 
 var port = process.env.PORT || 4000;
 app.listen(port);
