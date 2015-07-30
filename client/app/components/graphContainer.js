@@ -177,6 +177,49 @@ exports.controller = function(options) {
     });
   };
 
+  ctrl.initCostCompare = function (element, isInit, context) {
+
+    //Initialize number of restaurants chart
+    $(function () { 
+      $('.costCompare').highcharts({
+        colors: ['#7A878B', '#434348'],
+        chart: {
+          type: 'column',
+          spacing: 50
+        },
+        title: {
+          text: 'Median Neighborhood Income'
+        },
+        xAxis: {
+          categories: ['']
+        },
+        yAxis: {
+          title: {
+            text: 'Yearly Income (average)'
+          }
+        },
+        series: [{
+        name: 'Your Search',
+          data: [Location.zillowIncomeNeighborhood()]
+        }, {
+        name: 'City of Austin (average)',
+          // data: [Location.search().restaurants]
+          data: [Location.zillowIncomeCity()]
+        }],
+        tooltip: {
+          useHTML: true,
+          headerFormat: '<small>{point.key}</small><table>',
+          pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
+            '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+          footerFormat: '</table>',
+        },
+        credits: {
+          enabled: false
+        }
+      });
+    });
+  };
+
   
 };
 
@@ -185,7 +228,8 @@ exports.view = function(ctrl, options) {
     [m('.col-sm-4 .crimeGraph', {config: ctrl.initCrime}),
      m('.col-sm-4 .restaurantSafety', {config: ctrl.initRestSafety}),
      m('.col-sm-4 .restaurantNumber', {config: ctrl.initRestNumber}),
-     m('.col-sm-4 .commuteTime', {config: ctrl.initCommuteTime})
+     m('.col-sm-4 .commuteTime', {config: ctrl.initCommuteTime}),
+     m('.col-sm-4 .costCompare', {config: ctrl.initCostCompare}),
     ]);
 };
 
