@@ -145,7 +145,6 @@ app.post('/', function (req, res){
     // Send response back to client
     .then(function (httpResponseBody){
       var weights = req.body.weights || {restaurants: 50, crimes: 50, affordability: 50};
-      console.log(httpResponseBody)
       calculateLivability(weights, httpResponseBody, req.body.radius);
       res.json(httpResponseBody);
     });
