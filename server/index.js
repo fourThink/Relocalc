@@ -11,7 +11,6 @@ var Restaurant = require('./models/restaurant.js');
 var httpResponseBody = require('./lib/httpResponseBody.js');
 var calculateLivability = require('./lib/calculateLivability.js');
 var request = require('request-promise')
-var APIKeys = require('./apikeys.js')
 
 var shared = ['mithril'];
 app.get('/js/vendor-bundle.js', browserify(shared));
@@ -35,7 +34,7 @@ app.get('/', function (req, res){
 app.post('/distance', function(req, res){
   request('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + 
   req.body.address+'&destinations='+req.body.workAddress+'&arrival_time=1438610400&key='+ 
-  APIKeys.GoogleDistance, function(error, response, body) {
+  credentials.GoogleDistance, function(error, response, body) {
     if (error) throw error;
     res.send(body)
   })
@@ -45,10 +44,10 @@ app.post('/distance', function(req, res){
 var houseData = {};
 var neighborhoodURL = '';
 var addressOptionsTemplate = {
-  uri: 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id='+credentials+'&address=*&citystatezip=Austin+TX',
+  uri: 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id='+credentials.zillow+'&address=*&citystatezip=Austin+TX',
   method: 'GET'
 };var addressOptions = {
-  uri: 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id='+credentials+'&address=*&citystatezip=Austin+TX',
+  uri: 'http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id='+credentials.zillow+'&address=*&citystatezip=Austin+TX',
   method: 'GET'
 };
 var neighborhoodOptions = {
@@ -91,7 +90,7 @@ app.post('/', function (req, res){
   .then(function attachCommuteTime(httpResponseBody) {
     request('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + 
      req.body.address+'&destinations='+req.body.workAddress+'&arrival_time=1438610400&key='+ 
-     APIKeys.GoogleDistance, function(error, response, body) {
+     credentials.GoogleDistance, function(error, response, body) {
       if (error) throw error;
       httpResponseBody.distance = body;
     })
