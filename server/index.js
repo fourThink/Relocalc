@@ -7,8 +7,9 @@ var app = express();
 var Restaurant = require('./models/restaurant.js');
 var httpResponseBody = require('./lib/httpResponseBody.js');
 var calculateLivability = require('./lib/calculateLivability.js');
+var request = require('request-promise')
+var APIKeys = require('./apikeys.js')
 
-//provide a browserified f;ile at a path
 var shared = ['mithril'];
 app.get('/js/vendor-bundle.js', browserify(shared));
 app.get('/js/app-bundle.js', browserify('./client/app/index.js', { external: shared }));
@@ -20,7 +21,6 @@ app.use(bodyParser.json());
 app.use(express.static('client/public'));
 
 app.get('/', function (req, res){
- console.log('looking for restaurant!!');
  return Restaurant.getInspections('2801033')
  .then( function (restaurantList){
    res.json(restaurantList);
@@ -29,6 +29,14 @@ app.get('/', function (req, res){
 
 //app.get('/crimes', function (req, res){});
 
+app.post('/distance', function(req, res){
+  request('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + 
+  req.body.address+'&destinations='+req.body.workAddress+'&arrival_time=1438610400&key='+ 
+  APIKeys.GoogleDistance, function(error, response, body) {
+    if (error) throw error;
+    res.send(body)
+  })
+})
 
 app.post('/', function (req, res){
   function milestoMeters(miles){
@@ -39,7 +47,6 @@ app.post('/', function (req, res){
   	longitude: req.body.lng,
   	meters: milestoMeters(req.body.radius || 1) ,
   };
-  console.log('meters: ' + circle.meters);
   search('Crime', circle)
   .then(function attachCrimestoHttpResponse(crimes){
   	httpResponseBody.crimes = crimes;
@@ -48,7 +55,6 @@ app.post('/', function (req, res){
   .then(function attachRestaurantsToHttpResponse(restaurants){
   	httpResponseBody.restaurants = restaurants;
   	return httpResponseBody;
-    //return res.json(httpResponseBody);
   })
   .then(function attachSearchInspectionAvgToHttpResponse(httpResponseBody){
     var count = 0;
@@ -59,14 +65,20 @@ app.post('/', function (req, res){
     httpResponseBody.searchInspecAvg = sum / count;
     return httpResponseBody;
   })
+  .then(function attachCommuteTime(httpResponseBody) {
+    request('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + 
+     req.body.address+'&destinations='+req.body.workAddress+'&arrival_time=1438610400&key='+ 
+     APIKeys.GoogleDistance, function(error, response, body) {
+      if (error) throw error;
+      httpResponseBody.distance = body;
+    }).then(function(){return httpResponseBody
+  })
   .then(function (httpResponseBody){
     var weights = req.body.weights || {restaurants: 50, crimes: 50};
     calculateLivability(weights, httpResponseBody, req.body.radius);
-    console.log(Object.keys(httpResponseBody));
-    //console.log(weights)
     res.json(httpResponseBody);
   });
-});
+})});
 
 var port = process.env.PORT || 4000;
 app.listen(port);

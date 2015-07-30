@@ -47,8 +47,8 @@ function mapSetup(options, element, isInitialized) {
     var lat = options.location.lat() || 30.25;
     var lng = options.location.lng() || -97.75;
 
-    console.log(lat, lng);
-    console.log(isInitialized);
+    // console.log(lat, lng);
+    // console.log(isInitialized);
 
     var mapCenter = new google.maps.LatLng(lat, lng);
     var mapOptions = {

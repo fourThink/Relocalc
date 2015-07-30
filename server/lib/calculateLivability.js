@@ -7,6 +7,7 @@ var logDebug = function(string){
 //takes an object that has user slider weights, and returns an object with same information.
 //The purpose is to make sure the weights add up to 100, but maintains ratios to one another.
 var scaleWeights = function(weights){
+  console.log(weights)
   var sum = _.reduce(weights, function (tot, weight){
     return tot += +weight;
   }, 0)
@@ -30,6 +31,22 @@ var linEqHandler = function(data, tag){
         pnt2: {x: data.meanCrimesPerSqMi - 30, y: data.meanCrimesPerSqMi + 12},
         input: data.searchCrimesPerSqMi
       };;
+    case 'commute':
+      //Average and lowest average commute based on zipatlas.com
+      var commute = JSON.parse(data.distance)
+      if (commute.status === "INVALID_REQUEST") {
+        return {
+           pnt1: {x: 24.6, y: 80}, 
+           pnt2: {x: 16.1, y:100},
+           input: 24.6
+        }
+     }
+      var input = commute.rows[0].elements[0].duration.value/60
+      return {
+       pnt1: {x: 24.6, y: 80}, 
+       pnt2: {x: 16.1, y:100},
+       input: input
+      }
   }
 }
 
@@ -62,10 +79,10 @@ var calculateScore = function(handler, weight){
     score > 100 ? weight * 100 : score * weight
 }
 
-module.exports = function attachStatsToHttpResponeBody(weights, httpResponseBody, radius){
-  httpResponseBody.searchCrimesPerSqMi = (httpResponseBody.crimes.length / (Math.PI * radius * radius));  
-  httpResponseBody.livibility = _.reduce(scaleWeights(weights), function findPartialLivibility(score, val, key){
+module.exports = 
+  function attachStatsToHttpResponeBody(weights, httpResponseBody, radius){
+    httpResponseBody.searchCrimesPerSqMi = (httpResponseBody.crimes.length / (Math.PI * radius * radius));  
+    httpResponseBody.livibility = _.reduce(scaleWeights(weights), function findPartialLivibility(score, val, key){
   	return score += calculateScore(linEqHandler(httpResponseBody, key), val/100)
-
   }, 0);
 }
