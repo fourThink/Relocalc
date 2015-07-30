@@ -52,17 +52,35 @@ function mapSetup(options, element, isInitialized) {
 
     var mapCenter = new google.maps.LatLng(lat, lng);
     var mapOptions = {
-      center: mapCenter,
-      zoom: adjustZoom()
+      center: new google.maps.LatLng(30.2500, -97.7500),
+      zoom: adjustZoom(),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
     var map = new google.maps.Map(document.querySelector('.mapContainer'), mapOptions);
 
-    var iconImg = '../img/icon.png';
+    map.set('styles', [
+      {"featureType": "all",
+      "elementType": "all",
+        "stylers": [
+        {
+          "saturation": -100
+        },
+        {
+          "gamma": 0.5
+        }]
+      }
+    ]);
+
+    //var iconImg = '../img/icon.png';
+
+    var myLatLng = new google.maps.LatLng(30.2500, -97.7500);
 
     var marker = new google.maps.Marker({
-      position: mapCenter,
+      //position: mapCenter,
+      position: myLatLng,
       map: map,
+      icon: '/public/img//house2.png',
       // icon: iconImg,
       title: options.location.address() || ''
     });
