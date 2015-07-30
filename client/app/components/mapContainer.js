@@ -97,7 +97,8 @@ function mapSetup(options, element, isInitialized) {
         }]
     }
   ]);
-
+    var workLat  = options.location.workLat();
+    var workLng  = options.location.workLng();
   var mapCenter = new google.maps.LatLng(lat, lng);
   var mapOptions = {
     center: new google.maps.LatLng(30.2500, -97.7500),
@@ -121,6 +122,12 @@ function mapSetup(options, element, isInitialized) {
 
   function toggleBounce() {
 
+    var workMarker = new google.maps.Marker({
+      position: new google.maps.LatLng(workLat, workLng),
+      map: map,
+      // icon: iconImg,
+      title: options.location.workAddress() || ''
+    });
     if (marker.getAnimation() != null) {
       marker.setAnimation(null);
     } else {
