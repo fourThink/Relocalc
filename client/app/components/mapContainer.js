@@ -108,13 +108,18 @@ function mapSetup(options, element, isInitialized) {
   var myLatLng = new google.maps.LatLng(lat, lng);
 
   var marker = new google.maps.Marker({
-    //position: mapCenter,
     position: myLatLng,
     map: map,
-    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+    // icon: '/public/img//house2.png',
     title: options.location.address() || ''
   });
 
+  var workMarker = new google.maps.Marker({
+    position: new google.maps.LatLng(workLat, workLng),
+    map: map,
+    // icon: iconImg,
+    title: options.location.workAddress() || ''
+  });
 
   marker.setMap(map);
   google.maps.event.addListener(marker, 'click', toggleBounce);
