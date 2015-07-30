@@ -41,6 +41,7 @@ var Locations = module.exports = {
   commuteWeight: m.prop(''),
   address: m.prop(''),
   commuteTime: m.prop(''),
+  costWeight: m.prop(''),
 
   postToFetchRestaurantData: function(address, workAddress, callback) {
     Locations.address(address);
@@ -141,7 +142,6 @@ var modelData = function(data) {
     cityRestAvg: data.meanRestInspecAvg,
     cityCrimeAvg: data.meanCrimesPerSqMi,
   };
-  console.log('response:', response)
 
   if(isNaN(response.restAvg)) {
     toastr["error"]("No available data. Please check that the address");
