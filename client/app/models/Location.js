@@ -95,7 +95,8 @@ var Locations = module.exports = {
     return {
       address: m.prop(''),
       lat: m.prop(''),
-      lng: m.prop('')
+      lng: m.prop(''),
+      workAddress: m.prop('')
     }
   }
 

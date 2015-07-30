@@ -35,6 +35,11 @@ exports.view = function (ctrl, options) {
                 //this could be refactored to to use m.withAttr to set the values...
               onchange: function(e){ options.location.address(e.currentTarget.value); }}
             )],
+              [m('input.addressInput.workAddress[type="text"][placeholder="Enter your work address (1100 Congress Avenue, Austin, TX 78701)"]',
+                {value: options.location.workAddress(),
+                  //this could be refactored to to use m.withAttr to set the values...
+                onchange: function(e){ options.location.workAddress(e.currentTarget.value); }}
+            )],
             [m('h3',  "On a scale of 0-100, how important are these criteria in your search?")],
                 [m('.col-sm-6',
                   [m('h4', 'Crime Rate: ' + Location.crimeWeight())],
