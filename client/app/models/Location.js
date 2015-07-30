@@ -42,6 +42,8 @@ var Locations = module.exports = {
   address: m.prop(''),
   commuteTime: m.prop(''),
   costWeight: m.prop(''),
+  zillowIncomeNeighborhood: m.prop(0),
+  zillowIncomeCity: m.prop(0),
 
   postToFetchRestaurantData: function(address, workAddress, callback) {
     Locations.address(address);
@@ -141,6 +143,7 @@ var modelData = function(data) {
     livability: data.livibility,
     cityRestAvg: data.meanRestInspecAvg,
     cityCrimeAvg: data.meanCrimesPerSqMi,
+    zillow: data.zillowData
   };
 
   if(isNaN(response.restAvg)) {
