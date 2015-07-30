@@ -21,15 +21,22 @@ var linEqHandler = function(data, tag){
     case 'restaurants':
       return {
         pnt1: {x: data.meanRestInspecAvg, y: 80},
-        pnt2: {x: data.meanRestInspecAvg + 5, y: 100},
+        pnt2: {x: data.meanRestInspecAvg + 5, y: 100}, // For every change of 5 in a health inspection score, the restaurant livability portion changes by 20
         input: data.searchInspecAvg
       };
     case 'crimes':
       return {
         pnt1: {x: data.meanCrimesPerSqMi, y: data.meanCrimesPerSqMi},
-        pnt2: {x: data.meanCrimesPerSqMi - 30, y: data.meanCrimesPerSqMi + 12},
+        pnt2: {x: data.meanCrimesPerSqMi - 30, y: data.meanCrimesPerSqMi + 12}, // For every change of 30 in crimes/sq mi, the crimes livability portion changes by 12
         input: data.searchCrimesPerSqMi
-      };;
+      };
+      case 'affordability':
+        return {
+          pnt1: {x: data.zillowData.neighborhood.medianIncomeCity/1000, y: 75},
+          pnt2: {x: (data.zillowData.neighborhood.medianIncomeCity*0.5)/1000, y: 100}, // For every change of 10% in income vs city average, the affordability livability portion changes by 2.5
+          input: data.zillowData.neighborhood.medianIncomeNeighborhood/1000
+      };
+    ;
   }
 }
 
@@ -50,6 +57,8 @@ var linEq = function(handler){
   var m = slope(handler.pnt1, handler.pnt2)
   var x = handler.input
   var b = yIntercept(handler.pnt1, handler.pnt2)
+  console.log('m:', m,'x:',x,'b:',b)
+  console.log('y:',m*x+b)
   return m * x + b;
 
 }

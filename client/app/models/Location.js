@@ -56,7 +56,8 @@ var Locations = module.exports = {
         "radius": 1,
         "weights": {
           "crimes": Locations.crimeWeight() || 50,
-          "restaurants": Locations.restWeight() || 50
+          "restaurants": Locations.restWeight() || 50,
+          "affordability": Locations.costWeight() || 50,
         }
       };
       return m.request({method: "POST", url: "", 'Content-Type': 'application/json', data: locationData})
@@ -66,8 +67,6 @@ var Locations = module.exports = {
             Locations.search(data);
             Locations.zillowIncomeNeighborhood(data.zillow.neighborhood.medianIncomeNeighborhood);
             Locations.zillowIncomeCity(data.zillow.neighborhood.medianIncomeCity);
-            console.log('neighborhood', Locations.zillowIncomeNeighborhood())
-            console.log('city', Locations.zillowIncomeCity())
           }
             Locations.saveSearch(Locations.address(), res.livibility);
             return cb(data);

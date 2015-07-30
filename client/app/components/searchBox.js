@@ -57,6 +57,14 @@ exports.view = function (ctrl, options) {
                       )]
                     )]
                 )],
+                [m('.col-sm-6',
+                  [m('h4', 'Affordability: ' + Location.costWeight())],
+                    [m('.slider',
+                      [m('input[type="range"]'
+                        ,{min: 0, max: 100, step: 1, value: Location.costWeight(), onchange: m.withAttr('value', Location.costWeight)}
+                      )]
+                    )]
+                )],
             [m('input.addressInput.addressInput-submit[type="submit"][value="Try your luck"]')] //input form
         ),  //form-group
       ] //form
