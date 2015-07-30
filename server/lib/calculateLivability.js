@@ -57,8 +57,6 @@ var linEq = function(handler){
   var m = slope(handler.pnt1, handler.pnt2)
   var x = handler.input
   var b = yIntercept(handler.pnt1, handler.pnt2)
-  console.log('m:', m,'x:',x,'b:',b)
-  console.log('y:',m*x+b)
   return m * x + b;
 
 }
