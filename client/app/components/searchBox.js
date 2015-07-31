@@ -17,7 +17,7 @@ exports.controller = function (options) {
     var address = options.location.address();
     var workAddress = options.location.workAddress();
     if(!address || !workAddress){
-      console.log("null val");
+      //console.log("null val");
       swal("Hey you!", "Don't forget to enter both address fields!", "error");
     } else {console.log("address: ", address);}
 
