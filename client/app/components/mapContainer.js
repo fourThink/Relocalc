@@ -98,20 +98,19 @@ function mapSetup(options, element, isInitialized) {
     }
   ]);
 
-    var mapCenter = new google.maps.LatLng(lat, lng);
-    var mapOptions = {
-      center: new google.maps.LatLng(30.2500, -97.7500),
-      zoom: adjustZoom(),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+  var mapCenter = new google.maps.LatLng(lat, lng);
+  var mapOptions = {
+    center: new google.maps.LatLng(30.2500, -97.7500),
+    zoom: adjustZoom(),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
   var myLatLng = new google.maps.LatLng(lat, lng);
 
   var marker = new google.maps.Marker({
     //position: mapCenter,
     position: myLatLng,
     map: map,
-    icon: '/public/img//house2.png',
-    // icon: iconImg,
+    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
     title: options.location.address() || ''
   });
 
