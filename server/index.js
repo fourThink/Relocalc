@@ -178,7 +178,6 @@ app.post('/', function (req, res){
             }
             // Attach Zillow data to response
             httpResponseBody.zillowData = houseData
-            console.log(houseData)
           })
         } else {
           httpResponseBody.zillowData = {}
@@ -187,7 +186,7 @@ app.post('/', function (req, res){
       })
       // Send response back to client
       .then(function (httpResponseBody){
-        var weights = req.body.weights || {restaurants: 50, crimes: 50, affordability: 50};
+        var weights = req.body.weights || {restaurants: 50, crimes: 50, affordability: 50, size: 0};
         calculateLivability(weights, httpResponseBody, req.body.radius);
         res.json(httpResponseBody);
       });

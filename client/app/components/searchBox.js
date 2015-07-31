@@ -85,6 +85,14 @@ exports.view = function (ctrl, options) {
                       )]
                     )]
                 )],
+                [m('.col-sm-6',
+                  [m('h4', 'Home Size: ' + Location.sizeWeight())],
+                    [m('.slider',
+                      [m('input[type="range"]'
+                        ,{min: 0, max: 100, step: 1, value: Location.sizeWeight(), onchange: m.withAttr('value', Location.sizeWeight)}
+                      )]
+                    )]
+                )],
             [m('input.addressInput.addressInput-submit[type="submit"][value="Try your luck"]')] //input form
         ),  //form-group
       ] //form

@@ -45,8 +45,11 @@ var Locations = module.exports = {
   workAddress: m.prop(''),
   commuteTime: m.prop(''),
   costWeight: m.prop(''),
+  sizeWeight: m.prop(''),
   zillowIncomeNeighborhood: m.prop(0),
   zillowIncomeCity: m.prop(0),
+  zillowSizeNeighborhood: m.prop(0),
+  zillowSizeCity: m.prop(0),
 
   postToFetchRestaurantData: function(address, workAddress, callback) {
     Locations.address(address);
@@ -73,6 +76,7 @@ var Locations = module.exports = {
             "restaurants": Locations.restWeight() || 50,
             "commute" : workAddress !== '' ? Locations.commuteWeight() || 50 : 0,
             "affordability": Locations.costWeight() || 50,
+            "size": Locations.sizeWeight() || 0, // Default to zero if user does not specify
           }
         };
         return m.request({method: "POST", url: "", 'Content-Type': 'application/json', data: locationData})
@@ -82,6 +86,9 @@ var Locations = module.exports = {
               Locations.search(data);
               Locations.zillowIncomeNeighborhood(data.zillow.neighborhood.medianIncomeNeighborhood);
               Locations.zillowIncomeCity(data.zillow.neighborhood.medianIncomeCity);
+              Locations.zillowSizeNeighborhood(data.zillow.neighborhood.houseSizeNeighborhood);
+              Locations.zillowSizeCity(data.zillow.neighborhood.houseSizeCity);
+
             }
               Locations.saveSearch(Locations.address(), res.livibility);
               return callback(data);

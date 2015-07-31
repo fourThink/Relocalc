@@ -48,9 +48,15 @@ var linEqHandler = function(data, tag){
       }
     case 'affordability':
       return {
-        pnt1: {x: data.zillowData.neighborhood.medianIncomeCity/1000, y: 75},
-        pnt2: {x: (data.zillowData.neighborhood.medianIncomeCity*0.5)/1000, y: 100}, // For every change of 10% in income vs city average, the affordability livability portion changes by 2.5
+        pnt1: {x: data.zillowData.neighborhood.medianIncomeCity/1000, y: 80},
+        pnt2: {x: (data.zillowData.neighborhood.medianIncomeCity*0.5)/1000, y: 100}, 
         input: data.zillowData.neighborhood.medianIncomeNeighborhood/1000
+    }
+    case 'size':
+      return {
+        pnt1: {x: data.zillowData.neighborhood.houseSizeCity, y: 80},
+        pnt2: {x: (data.zillowData.neighborhood.houseSizeCity*0.7), y: 50}, 
+        input: data.zillowData.neighborhood.houseSizeNeighborhood
     };
   }
 }
@@ -80,6 +86,7 @@ var linEq = function(handler){
 //The purpose is to provide linEq w/ the correct handler, and to keep the score in the range 0-100
 var calculateScore = function(handler, weight){
   var score = linEq(handler);
+  console.log('score',score, 'weight', weight)
   return score < 0 ? 0 :
     score > 100 ? weight * 100 : score * weight
 }

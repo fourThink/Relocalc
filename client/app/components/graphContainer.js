@@ -273,6 +273,59 @@ exports.controller = function(options) {
     });
   };
 
+  ctrl.initSizeCompare = function (element, isInit, context) {
+
+    //Initialize number of restaurants chart
+    $(function () {
+      var userData = Location.zillowSizeNeighborhood()
+      var averageData = Location.zillowSizeCity()
+      var colors;
+      if (userData > averageData*1.2) {
+        colors = ['#55BF3B', '#434348']
+      } else if (userData < averageData*0.8) {
+        colors = ['#DF5353', '#434348']
+      } else {
+        colors = ['#DDDF0D', '#434348'] 
+      }
+      $('.sizeCompare').highcharts({
+        colors: colors,
+        chart: {
+          type: 'column',
+          spacing: 50
+        },
+        title: {
+          text: 'Median Neighborhood Home Size'
+        },
+        xAxis: {
+          categories: ['']
+        },
+        yAxis: {
+          title: {
+            text: 'Home Size (sq ft)'
+          }
+        },
+        series: [{
+        name: 'Your Search',
+          data: [Location.zillowSizeNeighborhood()]
+        }, {
+        name: 'City of Austin (average)',
+          // data: [Location.search().restaurants]
+          data: [Location.zillowSizeCity()]
+        }],
+        tooltip: {
+          useHTML: true,
+          headerFormat: '<small>{point.key}</small><table>',
+          pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
+            '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+          footerFormat: '</table>',
+        },
+        credits: {
+          enabled: false
+        }
+      });
+    });
+  };
+
   
 };
 
@@ -283,6 +336,7 @@ exports.view = function(ctrl, options) {
      m('.col-sm-4 .restaurantNumber', {config: ctrl.initRestNumber}),
      m('.col-sm-4 .commuteTime', {config: ctrl.initCommuteTime}),
      m('.col-sm-4 .costCompare', {config: ctrl.initCostCompare}),
+     m('.col-sm-4 .sizeCompare', {config: ctrl.initSizeCompare}),
     ]);
 };
 
