@@ -45,6 +45,8 @@ var Locations = module.exports = {
   workAddress: m.prop(''),
   commuteTime: m.prop(''),
   costWeight: m.prop(''),
+  menWeight: m.prop(''),
+  womenWeight: m.prop(''),
   sizeWeight: m.prop(''),
   zillowIncomeNeighborhood: m.prop(0),
   zillowIncomeCity: m.prop(0),
@@ -76,6 +78,8 @@ var Locations = module.exports = {
             "restaurants": Locations.restWeight() || 50,
             "commute" : workAddress !== '' ? Locations.commuteWeight() || 50 : 0,
             "affordability": Locations.costWeight() || 50,
+            "men": Locations.menWeight() || 0,
+            "women": Locations.womenWeight() || 0,
             "size": Locations.sizeWeight() || 0, // Default to zero if user does not specify
           }
         };

@@ -222,7 +222,7 @@ exports.controller = function(options) {
 
   ctrl.initCostCompare = function (element, isInit, context) {
 
-    //Initialize number of restaurants chart
+    //Initialize number of median income chart
     $(function () {
       var userData = Location.zillowIncomeNeighborhood()
       var averageData = Location.zillowIncomeCity()
@@ -273,8 +273,120 @@ exports.controller = function(options) {
     });
   };
 
-  ctrl.initSizeCompare = function (element, isInit, context) {
+  ctrl.initSingleLadies = function (element, isInit, context) {
 
+
+    //Initialize number of single ladies chart
+
+    if (Location.Locations.womenWeight() > 0) {
+        $(function () {
+          var userData = Location.zillowIncomeNeighborhood()
+          var averageData = Location.zillowIncomeCity()
+          var colors;
+          if (userData > averageData*1.2) {
+            colors = ['#DF5353', '#434348']
+          } else if (userData < averageData*0.8) {
+            colors = ['#55BF3B', '#434348']
+          } else {
+            colors = ['#DDDF0D', '#434348'] 
+          }
+          $('.costCompare').highcharts({
+            colors: colors,
+            chart: {
+              type: 'column',
+              spacing: 50
+            },
+            title: {
+              text: 'Median Neighborhood Income'
+            },
+            xAxis: {
+              categories: ['']
+            },
+            yAxis: {
+              title: {
+                text: 'Yearly Income (average)'
+              }
+            },
+            series: [{
+            name: 'Your Search',
+              data: [Location.zillowIncomeNeighborhood()]
+            }, {
+            name: 'City of Austin (average)',
+              // data: [Location.search().restaurants]
+              data: [Location.zillowIncomeCity()]
+            }],
+            tooltip: {
+              useHTML: true,
+              headerFormat: '<small>{point.key}</small><table>',
+              pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
+                '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+              footerFormat: '</table>',
+            },
+            credits: {
+              enabled: false
+            }
+          });
+        });
+
+
+  };
+
+  ctrl.initSingleMen = function (element, isInit, context) {
+
+    //Initialize number of restaurants chart
+    if (Location.Locations.menWeight() > 0) {
+      $(function () {
+        var userData = Location.zillowIncomeNeighborhood()
+        var averageData = Location.zillowIncomeCity()
+        var colors;
+        if (userData > averageData*1.2) {
+          colors = ['#DF5353', '#434348']
+        } else if (userData < averageData*0.8) {
+          colors = ['#55BF3B', '#434348']
+        } else {
+          colors = ['#DDDF0D', '#434348'] 
+        }
+        $('.costCompare').highcharts({
+          colors: colors,
+          chart: {
+            type: 'column',
+            spacing: 50
+          },
+
+            text: 'Median Neighborhood Income'
+          },
+          xAxis: {
+            categories: ['']
+          },
+          yAxis: {
+            title: {
+              text: 'Yearly Income (average)'
+            }
+          },
+          series: [{
+          name: 'Your Search',
+            data: [Location.zillowIncomeNeighborhood()]
+          }, {
+          name: 'City of Austin (average)',
+            // data: [Location.search().restaurants]
+            data: [Location.zillowIncomeCity()]
+          }],
+          tooltip: {
+            useHTML: true,
+            headerFormat: '<small>{point.key}</small><table>',
+            pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
+              '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+            footerFormat: '</table>',
+          },
+          credits: {
+            enabled: false
+    };
+  }
+
+        });
+
+
+  	ctrl.initSizeCompare = function (element, isInit, context) {
     //Initialize number of restaurants chart
     $(function () {
       var userData = Location.zillowSizeNeighborhood()
@@ -323,6 +435,8 @@ exports.controller = function(options) {
           enabled: false
         }
       });
+  
+
     });
   };
 
@@ -336,6 +450,8 @@ exports.view = function(ctrl, options) {
      m('.col-sm-4 .restaurantNumber', {config: ctrl.initRestNumber}),
      m('.col-sm-4 .commuteTime', {config: ctrl.initCommuteTime}),
      m('.col-sm-4 .costCompare', {config: ctrl.initCostCompare}),
+     m('.col-sm-4 .singleLadies', {config: ctrl.initSingleLadies}),
+     m('.col-sm-4 .singleMen', {config: ctrl.initSingleMen}),
      m('.col-sm-4 .sizeCompare', {config: ctrl.initSizeCompare}),
     ]);
 };

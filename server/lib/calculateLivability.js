@@ -58,6 +58,18 @@ var linEqHandler = function(data, tag){
         pnt2: {x: (data.zillowData.neighborhood.houseSizeCity*0.7), y: 50}, 
         input: data.zillowData.neighborhood.houseSizeNeighborhood
     };
+    case 'women':
+      return {
+        pnt1: {x: data.zillowData.neighborhood.percentSingleFemalesCity, y: 75},
+        pnt2: {x: (data.zillowData.neighborhood.percentSingleFemalesCity*1.3), y: 100}, // For every change of 10% in income vs city average, the affordability livability portion changes by 2.5
+        input: data.zillowData.neighborhood.percentSingleFemalesNeighborhood
+    };
+    case 'men':
+      return {
+        pnt1: {x: data.zillowData.neighborhood.percentSingleMalesCity, y: 75},
+        pnt2: {x: (data.zillowData.neighborhood.percentSingleMalesCity*1.3), y: 100}, // For every change of 10% in income vs city average, the affordability livability portion changes by 2.5
+        input: data.zillowData.neighborhood.percentSingleMalesNeighborhood
+    };
   }
 }
 

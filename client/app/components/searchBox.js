@@ -85,6 +85,21 @@ exports.view = function (ctrl, options) {
                       )]
                     )]
                 )],
+                  [m('h4', 'Single Men: ' + Location.menWeight())],
+                    [m('.slider',
+                      [m('input[type="range"]'
+                        ,{min: 0, max: 100, step: 1, value: Location.menWeight(), onchange: m.withAttr('value', Location.menWeight)}
+                      )]
+                    )]
+                )],
+                [m('.col-sm-6',
+                  [m('h4', 'Single Women: ' + Location.womenWeight())],
+                    [m('.slider',
+                      [m('input[type="range"]'
+                        ,{min: 0, max: 100, step: 1, value: Location.womenWeight(), onchange: m.withAttr('value', Location.womenWeight)}
+                      )]
+                    )]
+                )],
                 [m('.col-sm-6',
                   [m('h4', 'Home Size: ' + Location.sizeWeight())],
                     [m('.slider',
