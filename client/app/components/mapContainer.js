@@ -1,5 +1,6 @@
 var m = require('mithril');
 var Location = require('../models/location');
+var path = require('path')
 //var loaderView = require('./loader').loader;
 
 /**
@@ -35,37 +36,130 @@ exports.view = function(ctrl, options) {
 function mapSetup(options, element, isInitialized) {
 
   //we zoom in when a user does a search
-    var adjustZoom = function () {
-      if (options.location.address()) {
-        return 16;
+  var adjustZoom = function () {
+    if (options.location.address()) {
+      return 11;
+    }
+    else {
+      return 8;
+    }
+  };
+  //notice that the locations object has m.prop setters/getters which are from a virtual model
+  var lat = options.location.lat() || 30.25;
+  var lng = options.location.lng() || -97.75;
+
+  console.log(lat, lng);
+  console.log(isInitialized);
+
+  var mapCenter = new google.maps.LatLng(lat, lng);
+  var mapOptions = {
+    center: new google.maps.LatLng(30.2500, -97.7500),
+    zoom: adjustZoom(),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+
+  var workLat  = options.location.workLat() || 30.25;;
+  var workLng  = options.location.workLng() || -97.75;
+  var mapCenter = new google.maps.LatLng(lat, lng);
+  var mapOptions = {
+    center: new google.maps.LatLng(30.2500, -97.7500),
+    zoom: adjustZoom(),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+
+  var myLatLng = new google.maps.LatLng(lat, lng);
+  var workLatLng = new google.maps.LatLng(workLat, workLng)
+
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    icon: '/client/img/house',
+    title: options.location.address() || ''
+  });
+
+  var workMarker = new google.maps.Marker({
+    position: workLatLng,
+    map: map,
+    icon: '/client/img/office-building',
+    title: options.location.workAddress() || ''
+  });
+
+  var map = new google.maps.Map(document.querySelector('.mapContainer'), mapOptions);
+
+  //Adds markers to map
+  marker.setMap(map);
+  workMarker.setMap(map);
+
+  var directionsDisplay = new google.maps.DirectionsRenderer({
+    suppressMarkers: true,
+    draggable: true
+  });
+  var directionsService = new google.maps.DirectionsService()
+  var request = {
+    origin: myLatLng,
+    destination: workLatLng,
+    travelMode: google.maps.TravelMode.DRIVING,
+    avoidTolls: true
+  };
+  directionsService.route(request, function(res, status){
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setMap(map);
+      directionsDisplay.setDirections(res);
+    }
+  });
+
+
+  //Map styling
+
+  map.set('styles', [
+  {
+    "stylers": [
+      {
+        "hue": "#ff1a00"
+      },
+      {
+        "invert_lightness": true
+      },
+      {
+        "saturation": -100
+      },
+      {
+        "lightness": 40
+      },
+      {
+        "gamma": 0.5
       }
-      else {
-        return 8;
-      }
-    };
-    //notice that the locations object has m.prop setters/getters which are from a virtual model
-    var lat = options.location.lat() || 30.25;
-    var lng = options.location.lng() || -97.75;
+    ]
+  },
+    {
+      "featureType": "water",
+      "elementType": "geometry",
+      "stylers": [
+        {
+          "color": "#435359"
+        }
+      ]
+    },
+    {
+      "featureType": "landscape",
+      "stylers": [
+        {
+          "color": "#2A373C"
+        }]
+    }
+  ]);
+    var workLat  = options.location.workLat();
+    var workLng  = options.location.workLng();
 
-    console.log(lat, lng);
-    console.log(isInitialized);
+  google.maps.event.addListener(marker, 'click', toggleBounce);
 
-    var mapCenter = new google.maps.LatLng(lat, lng);
-    var mapOptions = {
-      center: mapCenter,
-      zoom: adjustZoom()
-    };
 
-    var map = new google.maps.Map(document.querySelector('.mapContainer'), mapOptions);
+  function toggleBounce() {
 
-    var iconImg = '../img/icon.png';
-
-    var marker = new google.maps.Marker({
-      position: mapCenter,
-      map: map,
-      // icon: iconImg,
-      title: options.location.address() || ''
-    });
-
-    marker.setMap(map);
+    if (marker.getAnimation() != null) {
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+  }
 }
