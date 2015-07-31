@@ -79,7 +79,10 @@ h3, h4 {
   height: 400px;
   width: 50%;
   padding: 100px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  border-style: solid;
+  border-width: 2px;
+  border-color: white; }
 
 .logout-btn {
   margin-top: 8px;
@@ -88,7 +91,7 @@ h3, h4 {
   color: white; }
 
 .login-btn {
-  background-color: #435359;
+  background-color: #3b5998;
   color: white; }
 
 .navbar-login {

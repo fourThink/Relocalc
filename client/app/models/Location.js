@@ -1,6 +1,6 @@
 var m = require('mithril');
 var Auth = require('./Auth');
-var fbUrl = 'https://craply.firebaseio.com/';
+var fbUrl = 'https://livability.firebaseio.com/';
 var maps = 'https://maps.googleapis.com/maps/api/geocode/';
 
 /**
@@ -116,7 +116,7 @@ var Locations = module.exports = {
 
 var modelData = function(data) {
   //Separate data into variables
-  var inspectCount = 0;   
+  var inspectCount = 0;
 
   var commuteData = JSON.parse(data.distance)
   if (commuteData.status === 'OK'){
