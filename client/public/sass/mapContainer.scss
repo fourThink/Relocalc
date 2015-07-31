@@ -3,6 +3,9 @@
   width: 50%;
   padding: 100px;
   margin: 0 auto;
+  border-style: solid;
+  border-width: 2px;
+  border-color: white;
 }
 
 .logout-btn {
@@ -13,7 +16,7 @@
 }
 
 .login-btn {
-  background-color: #435359;
+  background-color: #3b5998;
   color: white;
 }
 
