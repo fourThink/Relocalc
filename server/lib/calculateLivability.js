@@ -7,6 +7,7 @@ var logDebug = function(string){
 //takes an object that has user slider weights, and returns an object with same information.
 //The purpose is to make sure the weights add up to 100, but maintains ratios to one another.
 var scaleWeights = function(weights){
+  console.log(weights)
   var sum = _.reduce(weights, function (tot, weight){
     return tot += +weight;
   }, 0)

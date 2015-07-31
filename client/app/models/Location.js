@@ -45,6 +45,12 @@ var Locations = module.exports = {
   workAddress: m.prop(''),
   commuteTime: m.prop(''),
   costWeight: m.prop(''),
+  menWeight: m.prop(0),
+  womenWeight: m.prop(0),
+  zillowSingleLadiesCity : m.prop(''),
+  zillowSingleLadies : m.prop(''),
+  zillowSingleMenCity : m.prop(''),
+  zillowSingleMen : m.prop(''),
   menWeight: m.prop(''),
   womenWeight: m.prop(''),
   sizeWeight: m.prop(''),
@@ -90,6 +96,10 @@ var Locations = module.exports = {
               Locations.search(data);
               Locations.zillowIncomeNeighborhood(data.zillow.neighborhood.medianIncomeNeighborhood);
               Locations.zillowIncomeCity(data.zillow.neighborhood.medianIncomeCity);
+              Locations.zillowSingleMenCity(data.zillow.neighborhood.percentSingleMalesCity);
+              Locations.zillowSingleMen(data.zillow.neighborhood.percentSingleMalesNeighborhood);
+              Locations.zillowSingleLadiesCity(data.zillow.neighborhood.percentSingleFemalesCity);
+              Locations.zillowSingleLadies(data.zillow.neighborhood.percentSingleFemalesNeighborhood);
               Locations.zillowSizeNeighborhood(data.zillow.neighborhood.houseSizeNeighborhood);
               Locations.zillowSizeCity(data.zillow.neighborhood.houseSizeCity);
 

@@ -278,42 +278,41 @@ exports.controller = function(options) {
 
     //Initialize number of single ladies chart
 
-    if (Location.Locations.womenWeight() > 0) {
+    if (Location.womenWeight() > 0) {
         $(function () {
-          var userData = Location.zillowIncomeNeighborhood()
-          var averageData = Location.zillowIncomeCity()
+          var userData = Location.zillowSingleLadies()
+          var averageData = Location.zillowSingleLadiesCity()
           var colors;
-          if (userData > averageData*1.2) {
+          if (userData < averageData*0.8) {
             colors = ['#DF5353', '#434348']
-          } else if (userData < averageData*0.8) {
+          } else if (userData > averageData*1.2) {
             colors = ['#55BF3B', '#434348']
           } else {
             colors = ['#DDDF0D', '#434348'] 
           }
-          $('.costCompare').highcharts({
+          $('.singleLadies').highcharts({
             colors: colors,
             chart: {
               type: 'column',
               spacing: 50
             },
             title: {
-              text: 'Median Neighborhood Income'
+              text: 'Single Women'
             },
             xAxis: {
               categories: ['']
             },
             yAxis: {
               title: {
-                text: 'Yearly Income (average)'
+                text: 'Percent Single'
               }
             },
             series: [{
             name: 'Your Search',
-              data: [Location.zillowIncomeNeighborhood()]
+              data: [userData]
             }, {
             name: 'City of Austin (average)',
-              // data: [Location.search().restaurants]
-              data: [Location.zillowIncomeCity()]
+              data: [averageData]
             }],
             tooltip: {
               useHTML: true,
@@ -334,42 +333,41 @@ exports.controller = function(options) {
   ctrl.initSingleMen = function (element, isInit, context) {
 
     //Initialize number of restaurants chart
-    if (Location.Locations.menWeight() > 0) {
+    if (Location.menWeight() > 0) {
       $(function () {
-        var userData = Location.zillowIncomeNeighborhood()
-        var averageData = Location.zillowIncomeCity()
+        var userData = Location.zillowSingleMen()
+        var averageData = Location.zillowSingleMenCity()
         var colors;
-        if (userData > averageData*1.2) {
+        if (userData < averageData*0.8) {
           colors = ['#DF5353', '#434348']
-        } else if (userData < averageData*0.8) {
+        } else if (userData > averageData*1.2) {
           colors = ['#55BF3B', '#434348']
         } else {
           colors = ['#DDDF0D', '#434348'] 
         }
-        $('.costCompare').highcharts({
+        $('.singleMen').highcharts({
           colors: colors,
           chart: {
             type: 'column',
             spacing: 50
           },
 
-            text: 'Median Neighborhood Income'
+            text: 'Single Men'
           },
           xAxis: {
             categories: ['']
           },
           yAxis: {
             title: {
-              text: 'Yearly Income (average)'
+              text: 'Percent Single'
             }
           },
           series: [{
           name: 'Your Search',
-            data: [Location.zillowIncomeNeighborhood()]
+            data: [userData]
           }, {
           name: 'City of Austin (average)',
-            // data: [Location.search().restaurants]
-            data: [Location.zillowIncomeCity()]
+            data: [averageData]
           }],
           tooltip: {
             useHTML: true,
