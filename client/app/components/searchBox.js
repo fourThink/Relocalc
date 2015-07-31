@@ -85,7 +85,9 @@ exports.view = function (ctrl, options) {
                       )]
                     )]
                 )],
-            [m('input.addressInput.addressInput-submit[type="submit"][value="Try your luck"]')] //input form
+            [m('input.addressInput.addressInput-submit[type="submit"][href="#resultsHeadline"][value="Try your luck"]', {
+              config: scrollDown
+            })] //input form
         ),  //form-group
       ] //form
     ])//searchBox
@@ -93,3 +95,23 @@ exports.view = function (ctrl, options) {
   ])
 };
 
+function scrollDown (element, init, context){
+  if (!init) {
+    console.log(element)
+    $('input[href^="#resultsHeadline"]').on('click', function(event) {
+
+    var target = $( $(this).attr('href') );
+  console.log(target)
+
+    if( target.context ) {
+        event.preventDefault();
+        $('html, body').animate({
+            scrollTop: target.offset().top - 100
+        }, 1000);
+    }
+});
+
+
+  }
+
+}
