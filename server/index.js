@@ -166,9 +166,19 @@ app.post('/', function (req, res){
               //% of households with kids for neighborhood and Austin average
               houseData.neighborhood.percentWithKidsNeighborhood = (result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][4]['values'][0]['neighborhood'][0]['value'][0]['_']*100).toFixed(3)-0 //Convert decimal to percentage with 3 decimal places
               houseData.neighborhood.percentWithKidsCity = (result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][4]['values'][0]['city'][0]['value'][0]['_']*100).toFixed(3)-0
+            
+              //% single Males for neighborhood and Austin average
+              houseData.neighborhood.percentSingleMalesNeighborhood = (result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][1]['values'][0]['neighborhood'][0]['value'][0]['_']*100).toFixed(3)-0 //Convert decimal to percentage with 3 decimal places
+              houseData.neighborhood.percentSingleMalesCity = (result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][1]['values'][0]['city'][0]['value'][0]['_']*100).toFixed(3)-0
+            
+              //% single Females for neighborhood and Austin average
+              houseData.neighborhood.percentSingleFemalesNeighborhood = (result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][2]['values'][0]['neighborhood'][0]['value'][0]['_']*100).toFixed(3)-0 //Convert decimal to percentage with 3 decimal places
+              houseData.neighborhood.percentSingleFemalesCity = (result['Demographics:demographics']['response'][0]['pages'][0]['page'][2]['tables'][0]['table'][0]['data'][0]['attribute'][2]['values'][0]['city'][0]['value'][0]['_']*100).toFixed(3)-0
+
             }
             // Attach Zillow data to response
             httpResponseBody.zillowData = houseData
+            console.log(houseData)
           })
         } else {
           httpResponseBody.zillowData = {}
