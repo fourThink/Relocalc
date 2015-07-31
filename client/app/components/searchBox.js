@@ -85,6 +85,7 @@ exports.view = function (ctrl, options) {
                       )]
                     )]
                 )],
+                [m('.col-sm-6',
                   [m('h4', 'Single Men: ' + Location.menWeight())],
                     [m('.slider',
                       [m('input[type="range"]'
@@ -109,10 +110,9 @@ exports.view = function (ctrl, options) {
                     )]
                 )],
             [m('input.addressInput.addressInput-submit[type="submit"][value="Try your luck"]')] //input form
-        ),  //form-group
-      ] //form
-    ])//searchBox
-  ])
+        )]
+      ])
+    ])
   ])
 };
 

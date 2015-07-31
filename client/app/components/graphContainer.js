@@ -273,118 +273,7 @@ exports.controller = function(options) {
     });
   };
 
-  ctrl.initSingleLadies = function (element, isInit, context) {
-
-
-    //Initialize number of single ladies chart
-
-    if (Location.womenWeight() > 0) {
-        $(function () {
-          var userData = Location.zillowSingleLadies()
-          var averageData = Location.zillowSingleLadiesCity()
-          var colors;
-          if (userData < averageData*0.8) {
-            colors = ['#DF5353', '#434348']
-          } else if (userData > averageData*1.2) {
-            colors = ['#55BF3B', '#434348']
-          } else {
-            colors = ['#DDDF0D', '#434348'] 
-          }
-          $('.singleLadies').highcharts({
-            colors: colors,
-            chart: {
-              type: 'column',
-              spacing: 50
-            },
-            title: {
-              text: 'Single Women'
-            },
-            xAxis: {
-              categories: ['']
-            },
-            yAxis: {
-              title: {
-                text: 'Percent Single'
-              }
-            },
-            series: [{
-            name: 'Your Search',
-              data: [userData]
-            }, {
-            name: 'City of Austin (average)',
-              data: [averageData]
-            }],
-            tooltip: {
-              useHTML: true,
-              headerFormat: '<small>{point.key}</small><table>',
-              pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
-                '<td style="text-align: right"><b>{point.y}</b></td></tr>',
-              footerFormat: '</table>',
-            },
-            credits: {
-              enabled: false
-            }
-          });
-        });
-
-
-  };
-
-  ctrl.initSingleMen = function (element, isInit, context) {
-
-    //Initialize number of restaurants chart
-    if (Location.menWeight() > 0) {
-      $(function () {
-        var userData = Location.zillowSingleMen()
-        var averageData = Location.zillowSingleMenCity()
-        var colors;
-        if (userData < averageData*0.8) {
-          colors = ['#DF5353', '#434348']
-        } else if (userData > averageData*1.2) {
-          colors = ['#55BF3B', '#434348']
-        } else {
-          colors = ['#DDDF0D', '#434348'] 
-        }
-        $('.singleMen').highcharts({
-          colors: colors,
-          chart: {
-            type: 'column',
-            spacing: 50
-          },
-
-            text: 'Single Men'
-          },
-          xAxis: {
-            categories: ['']
-          },
-          yAxis: {
-            title: {
-              text: 'Percent Single'
-            }
-          },
-          series: [{
-          name: 'Your Search',
-            data: [userData]
-          }, {
-          name: 'City of Austin (average)',
-            data: [averageData]
-          }],
-          tooltip: {
-            useHTML: true,
-            headerFormat: '<small>{point.key}</small><table>',
-            pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
-              '<td style="text-align: right"><b>{point.y}</b></td></tr>',
-            footerFormat: '</table>',
-          },
-          credits: {
-            enabled: false
-    };
-  }
-
-        });
-
-
-  	ctrl.initSizeCompare = function (element, isInit, context) {
+    ctrl.initSizeCompare = function (element, isInit, context) {
     //Initialize number of restaurants chart
     $(function () {
       var userData = Location.zillowSizeNeighborhood()
@@ -433,13 +322,119 @@ exports.controller = function(options) {
           enabled: false
         }
       });
-  
-
     });
   };
 
-  
-};
+  ctrl.initSingleLadies = function (element, isInit, context) {
+    //Initialize number of single ladies chart
+    if (Location.womenWeight() > 0) {
+      $(function () {
+        var userData = Location.zillowSingleLadies()
+        var averageData = Location.zillowSingleLadiesCity()
+        var colors;
+        if (userData < averageData*0.8) {
+          colors = ['#DF5353', '#434348']
+        } else if (userData > averageData*1.2) {
+          colors = ['#55BF3B', '#434348']
+        } else {
+          colors = ['#DDDF0D', '#434348'] 
+        }
+        $('.singleLadies').highcharts({
+          colors: colors,
+          chart: {
+            type: 'column',
+            spacing: 50
+          },
+          title: {
+            text: 'Single Women'
+          },
+          xAxis: {
+            categories: ['']
+          },
+          yAxis: {
+            title: {
+              text: 'Percent Single'
+            }
+          },
+          series: [{
+          name: 'Your Search',
+            data: [userData]
+          }, {
+          name: 'City of Austin (average)',
+            data: [averageData]
+          }],
+          tooltip: {
+            useHTML: true,
+            headerFormat: '<small>{point.key}</small><table>',
+            pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
+              '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+            footerFormat: '</table>',
+          },
+          credits: {
+            enabled: false
+          }
+        });
+      });
+    };
+  }
+
+  ctrl.initSingleMen = function (element, isInit, context) {
+
+    //Initialize number of restaurants chart
+    if (Location.menWeight() > 0) {
+      $(function () {
+      var userData = Location.zillowSingleMen()
+      var averageData = Location.zillowSingleMenCity()
+      var colors;
+        if (userData < averageData*0.8) {
+          colors = ['#DF5353', '#434348']
+        } else if (userData > averageData*1.2) {
+          colors = ['#55BF3B', '#434348']
+        } else {
+          colors = ['#DDDF0D', '#434348'] 
+        }
+        $('.singleMen').highcharts({
+          colors: colors,
+          chart: {
+            type: 'column',
+            spacing: 50
+          },
+          title: {
+            text: 'Single Men'
+          },
+          xAxis: {
+            categories: ['']
+          },
+          yAxis: {
+            title: {
+              text: 'Percent Single'
+            }
+          },
+          series: [{
+          name: 'Your Search',
+            data: [userData]
+          }, {
+          name: 'City of Austin (average)',
+            data: [averageData]
+          }],
+          tooltip: {
+            useHTML: true,
+            headerFormat: '<small>{point.key}</small><table>',
+            pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
+              '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+            footerFormat: '</table>',
+
+          },
+          credits: {
+            enabled: false
+          }
+        });
+      });
+    }
+  }
+
+}
+
 
 exports.view = function(ctrl, options) {
  return  m('div', 
@@ -448,11 +443,9 @@ exports.view = function(ctrl, options) {
      m('.col-sm-4 .restaurantNumber', {config: ctrl.initRestNumber}),
      m('.col-sm-4 .commuteTime', {config: ctrl.initCommuteTime}),
      m('.col-sm-4 .costCompare', {config: ctrl.initCostCompare}),
+     m('.col-sm-4 .sizeCompare', {config: ctrl.initSizeCompare}),
      m('.col-sm-4 .singleLadies', {config: ctrl.initSingleLadies}),
      m('.col-sm-4 .singleMen', {config: ctrl.initSingleMen}),
-     m('.col-sm-4 .sizeCompare', {config: ctrl.initSizeCompare}),
-    ]);
+  ]);
 };
-
-
 
